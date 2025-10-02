@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'dombo',
+  title: 'Adstract Platform',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -60,7 +60,7 @@ presets: [
       respectPrefersColorScheme: true,
     }, //navbar \/
     navbar: {
-      title: 'dinbia',
+      title: 'Adstract Platofrm',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
