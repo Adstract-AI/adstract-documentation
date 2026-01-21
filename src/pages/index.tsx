@@ -33,7 +33,7 @@ function HomepageHeader() {
 
 export default function Home() {
   useEffect(() => {
-    window.location.href = '/dare'; // redirect to your first doc
+    window.location.href = '/overview'; // redirect to your first doc
   }, []);
 
   return <p>Redirecting to documentation...</p>;

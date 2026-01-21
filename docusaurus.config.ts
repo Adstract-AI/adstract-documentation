@@ -1,129 +1,94 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Adstract Platform',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  title: "AdstractAI Platform",
+  tagline: "Ad Network for LLMs",
+  favicon: "img/logo-white-2.svg",
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  url: "https://adstract.ai",
+  baseUrl: "/",
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: "Adstract-AI", // GitHub org/user name (no spaces)
+  projectName: "adstract-documentation", // repo name
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: "throw",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
-presets: [
-  [
-    'classic',
-    {
-      docs: {
-        sidebarPath: './sidebars.ts',
-        editUrl:
-          'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        routeBasePath: '/', // <-- this makes docs load at the root
-      },
-      blog: false, // optional: disable blog if you don’t want a home page
-      theme: {
-        customCss: './src/css/custom.css',
-      },
-    } satisfies Preset.Options,
+  presets: [
+    [
+      "classic",
+      {
+        docs: {
+          sidebarPath: require.resolve("./sidebars.ts"),
+          editUrl: "https://github.com/Adstract-AI/adstract-documentation",
+          routeBasePath: "/", // docs at site root
+        },
+        blog: false,
+        theme: {
+          customCss: require.resolve("./src/css/custom.css"),
+        },
+      } satisfies Preset.Options,
+    ],
   ],
-],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/favicon.png",
     colorMode: {
       respectPrefersColorScheme: true,
-    }, //navbar \/
+    },
     navbar: {
-      title: 'Adstract Platofrm',
+      title: "Adstract Platform",
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: "Adstract Logo",
+        src: "img/logo-white-2.svg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
+          href: "https://github.com/Adstract-AI/adstract-library",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            // Since routeBasePath is "/", your docs are at "/"
+            { label: "Getting Started", to: "/" },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            // Replace these when you have them
+            { label: "GitHub Issues", href: "https://github.com/Adstract-AI/adstract-library/issues" },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
+            { label: "Adstract.ai", href: "https://adstract.ai" },
+            { label: "GitHub", href: "https://github.com/Adstract-AI/adstract-library" },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Adstract AI.`,
     },
     prism: {
       theme: prismThemes.github,
@@ -133,3 +98,4 @@ presets: [
 };
 
 export default config;
+
