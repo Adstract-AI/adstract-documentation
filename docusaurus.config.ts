@@ -13,8 +13,9 @@ const config: Config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  url: "https://adstract.ai",
-  baseUrl: "/",
+  url: "https://adstract-ai.github.io",
+  baseUrl: "/adstract-documentation/",
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   organizationName: "Adstract-AI", // GitHub org/user name (no spaces)
