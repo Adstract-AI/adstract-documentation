@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs_site=self.webpackChunkdocs_site||[]).push([[583],{8198:(e,t,c)=>{c.r(t),c.d(t,{default:()=>s});c(8774),c(4586),c(1107);var i=c(6540);var n=c(4848);function s(){return(0,i.useEffect)(()=>{window.location.href="/overview"},[]),(0,n.jsx)("p",{children:"Redirecting to documentation..."})}}}]);
