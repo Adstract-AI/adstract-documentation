@@ -1,40 +1,32 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-import React, { useEffect } from 'react';
 
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-
 export default function Home() {
-  useEffect(() => {
-    window.location.href = '/overview'; // redirect to your first doc
-  }, []);
+  return (
+    <Layout title="Choose Documentation" description="Choose SDK or API documentation">
+      <main className={styles.page}>
+        <section className={styles.chooser}>
+          <p className={styles.eyebrow}>Adstract Documentation</p>
+          <h1 className={styles.title}>Choose Your Documentation</h1>
+          <p className={styles.subtitle}>Select SDK docs or preview upcoming API docs.</p>
 
-  return <p>Redirecting to documentation...</p>;
+          <div className={styles.cardGrid}>
+            <Link className={styles.card} to="/overview">
+              <span className={styles.cardLabel}>Python SDK</span>
+              <strong className={styles.cardTitle}>SDK Documentation</strong>
+              <span className={styles.cardCopy}>Get started with the client, requests, metadata, and errors.</span>
+            </Link>
+
+            <Link className={styles.card} to="/api">
+              <span className={styles.cardLabel}>REST API</span>
+              <strong className={styles.cardTitle}>API Documentation</strong>
+              <span className={styles.cardCopy}>Explore endpoints and workflows. This section is coming soon.</span>
+            </Link>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
 }

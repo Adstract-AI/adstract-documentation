@@ -1,23 +1,107 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+.page {
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem 3rem;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(14, 165, 166, 0.14), transparent 46%),
+    radial-gradient(circle at 90% 90%, rgba(249, 115, 22, 0.16), transparent 44%),
+    linear-gradient(165deg, #f6f8fb 0%, #eff6f6 100%);
+}
 
-.heroBanner {
-  padding: 4rem 0;
+[data-theme='dark'] .page {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(13, 148, 136, 0.24), transparent 46%),
+    radial-gradient(circle at 85% 90%, rgba(234, 88, 12, 0.2), transparent 45%),
+    linear-gradient(165deg, #0f172a 0%, #0b1321 100%);
+}
+
+.chooser {
+  width: min(900px, 100%);
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #0f766e;
 }
 
-.buttons {
+[data-theme='dark'] .eyebrow {
+  color: #5eead4;
+}
+
+.title {
+  margin: 0.6rem 0 0;
+  font-size: clamp(1.8rem, 2.7vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0.8rem auto 2rem;
+  max-width: 48ch;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  text-align: left;
+  padding: 1.35rem;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+[data-theme='dark'] .card {
+  border-color: rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.75);
+  box-shadow: 0 10px 28px rgba(2, 6, 23, 0.45);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(13, 148, 136, 0.55);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+}
+
+.cardLabel {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #0f766e;
+}
+
+[data-theme='dark'] .cardLabel {
+  color: #2dd4bf;
+}
+
+.cardTitle {
+  font-size: 1.12rem;
+}
+
+.cardCopy {
+  color: var(--ifm-color-emphasis-700);
+}
+
+@media (max-width: 768px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
 }
