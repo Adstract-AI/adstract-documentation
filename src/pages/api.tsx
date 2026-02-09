@@ -3,19 +3,19 @@ import Layout from '@theme/Layout';
 
 import styles from './api.module.css';
 
-export default function ApiDocsSoonPage() {
+export default function ApiDocsPage() {
   return (
-    <Layout title="API Documentation" description="API docs are coming soon">
+    <Layout title="API Documentation" description="API docs entrypoint">
       <main className={styles.page}>
         <section className={styles.panel}>
           <p className={styles.kicker}>Adstract API</p>
-          <h1 className={styles.title}>Coming Really Soon...</h1>
+          <h1 className={styles.title}>API Docs</h1>
           <p className={styles.copy}>
-            We are currently building the API docs. Check back shortly for endpoints, authentication,
-            request schemas, and examples.
+            Start with the API overview, then go to the ad injection endpoint reference,
+            schema details, and error behavior.
           </p>
-          <Link className={styles.link} to="/">
-            Back to Documentation Chooser
+          <Link className={styles.link} to="/api-overview">
+            Open API Overview
           </Link>
         </section>
       </main>
