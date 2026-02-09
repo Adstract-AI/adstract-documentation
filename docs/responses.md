@@ -1,23 +1,30 @@
 ---
 title: Responses
-description: The AdResponse payload and how to use it.
+description: Understand EnhancementResult and AdResponse fields.
 ---
 
-`request_ad` returns an `AdResponse` object with the raw JSON payload and a convenience `ads` list when present.
+`request_ad_or_default` returns `EnhancementResult`.
+
+`EnhancementResult` fields:
+
+- `prompt`: enhanced prompt on success, original prompt on fallback.
+- `success`: `True` when enhancement succeeded.
+- `error`: captured exception on failure (method does not raise).
+- `conversation`: resolved conversation context.
+- `ad_response`: parsed `AdResponse` when available.
 
 ```python
-response = client.request_ad(
+result = client.request_ad_or_default(
     prompt="Explain SOC 2",
-    conversation={
-        "conversation_id": "conv-500",
-        "session_id": "sess-500",
-        "message_id": "msg-500",
-    },
-    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+    config=config,
 )
 
-print(response.raw)
-print(response.ads)
+if result.success and result.ad_response and result.ad_response.aepi:
+    print(result.ad_response.aepi.aepi_text)
+    print(result.ad_response.tracking_url)
+    print(result.ad_response.sponsored_label)
+else:
+    print(result.error)
 ```
 
-`response.raw` includes the full JSON payload returned by the API. `response.ads` is `None` if the response does not include an `ads` list.
+`AdResponse` commonly includes `ad_request_id`, `ad_response_id`, `execution_time_ms`, `aepi`, `tracking_url`, `tracking_identifier`, `sponsored_label`, and `product_name`.

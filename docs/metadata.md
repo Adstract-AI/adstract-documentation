@@ -1,96 +1,37 @@
 ---
 title: Metadata
-description: Client and geo metadata for ad targeting.
+description: How client metadata is generated from request context.
 ---
 
-Metadata provides information about the user and request context. The SDK merges derived metadata from `user_agent` with any explicit values you provide.
+The SDK builds `metadata.client` automatically from `user_agent` and `x_forwarded_for`.
 
 ## Client metadata
 
-The SDK derives these automatically from the `user_agent` string:
+These fields are derived and sent automatically:
 
 - `user_agent_hash`
 - `device_type`
 - `os_family`
 - `browser_family`
 - `sdk_version`
+- `x_forwarded_for`
 
-You can override or extend values by passing `metadata`:
+Example request:
 
 ```python
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
-client = AdClient(api_key="your-api-key")
-response = client.request_ad(
+client = Adstract(api_key="your-api-key")
+result = client.request_ad_or_default(
     prompt="Summarize the benefits of SSO",
-    conversation={
-        "conversation_id": "conv-200",
-        "session_id": "sess-200",
-        "message_id": "msg-200",
-    },
-    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
-    metadata={
-        "client": {
-            "referrer": "https://docs.example.com",
-        }
-    },
+    config=AdRequestConfiguration(
+        session_id="sess-200",
+        user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+        x_forwarded_for="203.0.113.20",
+    ),
 )
 ```
 
-## Geo metadata
+`result` does not expose metadata directly, but this metadata is included in the request payload sent by the SDK.
 
-Geo fields support ISO-2 country codes and optional language data.
-
-```python
-metadata = {
-    "geo": {
-        "geo_country": "US",
-        "geo_region": "CA",
-        "city": "San Francisco",
-        "language": "en-US",
-    }
-}
-```
-
-## Geo provider helper
-
-You can supply a `geo_provider` function and `x_forwarded_for` to enrich geo data.
-
-```python
-from adstractai import AdClient
-
-
-def geo_provider(ip: str) -> dict:
-    return {"geo_country": "US", "geo_region": "NY", "city": "New York"}
-
-
-client = AdClient(api_key="your-api-key")
-response = client.request_ad(
-    prompt="Best note taking apps",
-    conversation={
-        "conversation_id": "conv-300",
-        "session_id": "sess-300",
-        "message_id": "msg-300",
-    },
-    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    x_forwarded_for="203.0.113.10",
-    geo_provider=geo_provider,
-)
-```
-
-## Accept-Language parsing
-
-If you pass `accept_language`, the SDK will populate `metadata.geo.language` when it is not already set.
-
-```python
-response = client.request_ad(
-    prompt="How to manage costs?",
-    conversation={
-        "conversation_id": "conv-301",
-        "session_id": "sess-301",
-        "message_id": "msg-301",
-    },
-    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
-    accept_language="en-US,en;q=0.9",
-)
-```
+Geo helper hooks such as `geo_provider` and `accept_language` are not part of this SDK version.

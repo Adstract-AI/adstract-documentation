@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Send your first ad request with the SDK.
+description: Make your first ad enhancement request and report usage.
 ---
 
 ## Set your API key
@@ -12,42 +12,54 @@ export ADSTRACT_API_KEY="your-api-key"
 ## Make a request
 
 ```python
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
-client = AdClient()
+client = Adstract()
 
-response = client.request_ad(
+result = client.request_ad_or_default(
     prompt="How do I improve analytics in my LLM app?",
-    conversation={
-        "conversation_id": "conv-123",
-        "session_id": "session-abc",
-        "message_id": "msg-001",
-    },
-    user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+    config=AdRequestConfiguration(
+        session_id="session-abc",
+        user_agent=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        ),
+        x_forwarded_for="203.0.113.10",
+    ),
 )
 
-print(response.raw)
+print(result.success)
+print(result.prompt)
+
+# Your application sends result.prompt to an LLM and gets llm_response.
+llm_response = result.prompt
+client.analyse_and_report(enhancement_result=result, llm_response=llm_response)
+client.close()
 ```
 
 ## Async example
 
 ```python
 import asyncio
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
 
 async def main() -> None:
-    client = AdClient()
-    response = await client.request_ad_async(
+    client = Adstract()
+    result = await client.request_ad_or_default_async(
         prompt="Give me productivity tips",
-        conversation={
-            "conversation_id": "conv-123",
-            "session_id": "session-abc",
-            "message_id": "msg-002",
-        },
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        config=AdRequestConfiguration(
+            session_id="session-abc",
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ),
+            x_forwarded_for="203.0.113.10",
+        ),
     )
-    print(response.ads)
+
+    llm_response = result.prompt
+    await client.analyse_and_report_async(enhancement_result=result, llm_response=llm_response)
     await client.aclose()
 
 

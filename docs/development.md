@@ -1,7 +1,9 @@
 ---
 title: Development
-description: Local development and release steps.
+description: Local SDK development and release steps.
 ---
+
+This page covers development for the Python SDK in `adstract-library`.
 
 ## Setup
 

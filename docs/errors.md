@@ -3,35 +3,39 @@ title: Errors
 description: Typed exceptions raised by the SDK.
 ---
 
-All errors inherit from `AdSDKError`. Handle them in order of specificity.
+All SDK exceptions inherit from `AdSDKError`.
+
+`request_ad_or_default` and `request_ad_or_default_async` capture errors and return them on `EnhancementResult.error` instead of raising.
 
 ```python
-from adstractai import AdClient
-from adstractai import AuthenticationError, RateLimitError, ServerError
+from adstractai import AdRequestConfiguration, Adstract
+from adstractai.errors import AuthenticationError, MissingParameterError, RateLimitError, ServerError
 
-client = AdClient(api_key="your-api-key")
+client = Adstract(api_key="your-api-key")
 
-try:
-    client.request_ad(
-        prompt="Explain unit economics",
-        conversation={
-            "conversation_id": "conv-600",
-            "session_id": "sess-600",
-            "message_id": "msg-600",
-        },
+result = client.request_ad_or_default(
+    prompt="Explain unit economics",
+    config=AdRequestConfiguration(
+        session_id="sess-600",
         user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-    )
-except AuthenticationError:
+        x_forwarded_for="203.0.113.40",
+    ),
+)
+
+if isinstance(result.error, AuthenticationError):
     print("Invalid API key")
-except RateLimitError:
+elif isinstance(result.error, MissingParameterError):
+    print("Required input is missing")
+elif isinstance(result.error, RateLimitError):
     print("Slow down")
-except ServerError:
+elif isinstance(result.error, ServerError):
     print("Try again later")
 ```
 
 ## Error types
 
 - `ValidationError`: invalid input data
+- `MissingParameterError`: required request parameter is empty or missing
 - `AuthenticationError`: missing or invalid API key
 - `RateLimitError`: request limit exceeded
 - `ServerError`: server-side error (5xx)

@@ -1,28 +1,28 @@
 ---
 title: Ad Requests
-description: The request payload structure for ad selection.
+description: Input configuration and validation for ad enhancement.
 ---
 
-Requests are validated and converted into an `AdRequest` model before being sent.
+All requests are normalized into an `AdRequest` model before being sent.
 
 ## Required fields
 
 - `prompt`: text prompt sent to your LLM (minimum length 3).
-- `conversation`: identifying fields for the chat session.
-- `user_agent`: required by the client to build metadata.
+- `config.user_agent`: required for metadata generation.
+- `config.x_forwarded_for`: required for client context.
+- `config.session_id` or `config.conversation`: one of these is required.
 
 ```python
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
-client = AdClient(api_key="your-api-key")
-response = client.request_ad(
+client = Adstract(api_key="your-api-key")
+result = client.request_ad_or_default(
     prompt="What is RAG?",
-    conversation={
-        "conversation_id": "conv-100",
-        "session_id": "sess-100",
-        "message_id": "msg-100",
-    },
-    user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+    config=AdRequestConfiguration(
+        session_id="sess-100",
+        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+        x_forwarded_for="203.0.113.10",
+    ),
 )
 ```
 
@@ -32,8 +32,10 @@ response = client.request_ad(
 conversation = {
     "conversation_id": "conv-123",
     "session_id": "session-abc",
-    "message_id": "msg-001",
+    "message_id": "msg_u_001",
 }
 ```
 
 All three fields are required and must be non-empty strings.
+
+If both `session_id` and `conversation` are provided, `conversation` takes precedence.

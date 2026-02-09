@@ -1,50 +1,57 @@
 ---
-title: AdClient
-description: Sync and async request APIs.
+title: Adstract Client
+description: Sync and async enhancement plus reporting APIs.
 ---
 
-`AdClient` sends ad requests to the Adstract backend and returns typed responses.
+`Adstract` is the SDK entrypoint for ad enhancement and ad acknowledgment reporting.
 
-## Sync API
+## Sync enhancement
 
 ```python
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
-client = AdClient(api_key="your-api-key")
-response = client.request_ad(
+client = Adstract(api_key="your-api-key")
+result = client.request_ad_or_default(
     prompt="Explain vector databases",
-    conversation={
-        "conversation_id": "conv-001",
-        "session_id": "sess-001",
-        "message_id": "msg-001",
-    },
-    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+    config=AdRequestConfiguration(
+        session_id="sess-001",
+        user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+        x_forwarded_for="198.51.100.44",
+    ),
 )
+
+print(result.success)
+print(result.prompt)
 ```
 
-## Async API
+## Async enhancement
 
 ```python
 import asyncio
-from adstractai import AdClient
+from adstractai import AdRequestConfiguration, Adstract
 
 
 async def main() -> None:
-    client = AdClient(api_key="your-api-key")
-    response = await client.request_ad_async(
+    client = Adstract(api_key="your-api-key")
+    result = await client.request_ad_or_default_async(
         prompt="How does caching help latency?",
-        conversation={
-            "conversation_id": "conv-002",
-            "session_id": "sess-002",
-            "message_id": "msg-002",
-        },
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        config=AdRequestConfiguration(
+            session_id="sess-002",
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            x_forwarded_for="198.51.100.45",
+        ),
     )
+    print(result.prompt)
     await client.aclose()
 
 
 asyncio.run(main())
 ```
+
+## Reporting methods
+
+- `analyse_and_report(...)`: sends ad acknowledgment after your LLM returns a response.
+- `analyse_and_report_async(...)`: async version for async application flows.
 
 ## Resource cleanup
 
