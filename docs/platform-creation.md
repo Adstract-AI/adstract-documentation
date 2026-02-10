@@ -46,4 +46,4 @@ After submission, the new platform appears in the `Platform` page list.
 
 ## Next steps
 
-- Continue to [Get API Key](/get-api-key) to create and manage keys for your platform.
+- Continue to [API Key](/api-key) to create and manage keys for your platform.

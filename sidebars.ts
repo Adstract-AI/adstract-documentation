@@ -15,28 +15,48 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Roles',
-                    items: ['roles', 'role-user', 'role-publisher', 'role-advertiser'],
+                    items: ['roles-overview', 'role-user', 'role-publisher', 'role-advertiser'],
                 },
                 'verification',
                 'platform-creation',
-                'get-api-key'
+                'api-key'
 
             ],
         },
         {
             type: 'category',
             label: 'Core Concepts',
-            items: ['client', 'ad-request-configuration', 'request', 'responses', 'errors'],
+            items: ['sdk-installation', 'client', 'ad-request-configuration', 'enhancement-result', 'exception'],
+        },
+        {
+            type: 'category',
+            label: 'Starting',
+            items: ['initialize-integration'],
+        },
+        {
+            type: 'category',
+            label: 'Enhancement',
+            items: ['request-ad-or-default', 'asynchronous-enhancement'],
         },
         {
             type: 'category',
             label: 'Analytics and Reporting',
-            items: ['metadata', 'constraints'],
+            items: ['analyse-and-report', 'asynchronous-analytics-and-reporting'],
         },
         {
             type: 'category',
-            label: 'Contributing',
-            items: ['development'],
+            label: 'Finishing',
+            items: ['finishing-and-lifecycle'],
+        },
+        {
+            type: 'category',
+            label: 'Important and Disclaimers',
+            items: ['important-disclaimers'],
+        },
+        {
+            type: 'category',
+            label: 'Resources',
+            items: ['terms-of-condition', 'change-log', 'your-data'],
         },
     ],
 };

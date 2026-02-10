@@ -56,6 +56,11 @@ const config: Config = {
         src: "img/logo-white-2.svg",
       },
       items: [
+          {
+          href: "https://adstract.ai",
+          label: "Adstract.ai",
+          position: "right",
+        },
         {
           href: "https://github.com/Adstract-AI/adstract-library",
           label: "Adstract SDK",
@@ -74,16 +79,16 @@ const config: Config = {
           ],
         },
         {
-          title: "Community",
-          items: [
-            { label: "GitHub Issues", href: "https://github.com/Adstract-AI/adstract-library/issues" },
-          ],
-        },
-        {
-          title: "More",
+          title: "Products",
           items: [
             { label: "Adstract.ai", href: "https://adstract.ai" },
             { label: "Adstract SDK", href: "https://github.com/Adstract-AI/adstract-library" },
+          ],
+        },
+        {
+          title: "Community",
+          items: [
+            { label: "GitHub Issues", href: "https://github.com/Adstract-AI/adstract-library/issues" },
           ],
         },
       ],

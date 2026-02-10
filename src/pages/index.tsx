@@ -10,7 +10,7 @@ export default function Home() {
         <section className={styles.chooser}>
           <p className={styles.eyebrow}>Adstract Documentation</p>
           <h1 className={styles.title}>Choose Your Documentation</h1>
-          <p className={styles.subtitle}>Select SDK documentation.</p>
+          <p className={styles.subtitle}>Start with SDK documentation, or review API documentation.</p>
 
           <div className={styles.cardGrid}>
             <Link className={styles.card} to="/overview">
@@ -18,6 +18,14 @@ export default function Home() {
               <strong className={styles.cardTitle}>SDK Documentation</strong>
               <span className={styles.cardCopy}>Get started with the client, requests, metadata, and errors.</span>
             </Link>
+
+            <div className={styles.card} aria-disabled="true">
+              <span className={styles.cardLabel}>API</span>
+              <strong className={styles.cardTitle}>API Documentation</strong>
+              <span className={styles.cardCopy}>
+                API support is coming soon, and API documentation will be published with that release.
+              </span>
+            </div>
           </div>
         </section>
       </main>

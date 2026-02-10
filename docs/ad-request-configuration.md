@@ -98,6 +98,7 @@ result = client.request_ad_or_default(
 
 ## Next steps
 
-- Continue to [Ad Requests](/request) for full request payload structure.
-- Continue to [Responses](/responses) for output handling.
-- Continue to [Errors](/errors) for validation and runtime error behavior.
+- Continue to [Initialize Your Integration](/initialize-integration) to begin execution with a configured client.
+- Continue to [Adstract Client](/client) for client-level runtime behavior.
+- Continue to [EnhancementResult](/enhancement-result) for output handling.
+- Continue to [Exception](/exception) for validation and runtime error behavior.

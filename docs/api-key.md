@@ -1,5 +1,5 @@
 ---
-title: Get API Key
+title: API Key
 description: Step-by-step process to get an Adstract API key as a Publisher.
 ---
 
@@ -53,7 +53,4 @@ code in your application.
 
 ## Next steps
 
-- Continue to [Adstract Client](/client).
-- In that page, review the dedicated constructor section for a detailed
-  explanation of every `Adstract` initialization parameter and how to choose
-  values for your environment.
+- Continue to [SDK Installation](/sdk-installation).

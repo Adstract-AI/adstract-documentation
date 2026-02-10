@@ -145,7 +145,7 @@ client = Adstract(api_key="your-api-key")
 
 ## Next steps
 
+- Continue to [Initialize Your Integration](/initialize-integration) to instantiate the client in the runtime flow.
 - Continue to [AdRequestConfiguration](/ad-request-configuration) for request-level configuration fields.
-- Continue to [Ad Requests](/request) for input object structure and required request metadata.
-- Continue to [Responses](/responses) for output handling.
-- Continue to [Errors](/errors) for error type behavior.
+- Continue to [EnhancementResult](/enhancement-result) for output handling.
+- Continue to [Exception](/exception) for error type behavior.
