@@ -3,6 +3,9 @@ title: Responses
 description: Understand EnhancementResult and AdResponse fields.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 `request_ad_or_default` returns `EnhancementResult`.
 
 `EnhancementResult` fields:
@@ -12,6 +15,9 @@ description: Understand EnhancementResult and AdResponse fields.
 - `error`: captured exception on failure (method does not raise).
 - `conversation`: resolved conversation context.
 - `ad_response`: parsed `AdResponse` when available.
+
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
 
 ```python
 result = client.request_ad_or_default(
@@ -26,5 +32,8 @@ if result.success and result.ad_response and result.ad_response.aepi:
 else:
     print(result.error)
 ```
+
+</TabItem>
+</Tabs>
 
 `AdResponse` commonly includes `ad_request_id`, `ad_response_id`, `execution_time_ms`, `aepi`, `tracking_url`, `tracking_identifier`, `sponsored_label`, and `product_name`.

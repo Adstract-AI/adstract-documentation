@@ -3,6 +3,9 @@ title: Metadata
 description: How client metadata is generated from request context.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The SDK builds `metadata.client` automatically from `user_agent` and `x_forwarded_for`.
 
 ## Client metadata
@@ -18,6 +21,9 @@ These fields are derived and sent automatically:
 
 Example request:
 
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
+
 ```python
 from adstractai import AdRequestConfiguration, Adstract
 
@@ -31,6 +37,9 @@ result = client.request_ad_or_default(
     ),
 )
 ```
+
+</TabItem>
+</Tabs>
 
 `result` does not expose metadata directly, but this metadata is included in the request payload sent by the SDK.
 

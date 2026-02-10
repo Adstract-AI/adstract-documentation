@@ -3,9 +3,15 @@ title: Errors
 description: Typed exceptions raised by the SDK.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 All SDK exceptions inherit from `AdSDKError`.
 
 `request_ad_or_default` and `request_ad_or_default_async` capture errors and return them on `EnhancementResult.error` instead of raising.
+
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
 
 ```python
 from adstractai import AdRequestConfiguration, Adstract
@@ -31,6 +37,9 @@ elif isinstance(result.error, RateLimitError):
 elif isinstance(result.error, ServerError):
     print("Try again later")
 ```
+
+</TabItem>
+</Tabs>
 
 ## Error types
 

@@ -3,9 +3,15 @@ title: Wrapping Modes
 description: Configure XML or plain ad wrapping behavior.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This SDK version does not expose request-level ad constraints.
 
 Instead, formatting behavior is controlled by `wrapping_type` when creating `Adstract`.
+
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
 
 ```python
 from adstractai import AdRequestConfiguration, Adstract
@@ -21,6 +27,9 @@ result = client.request_ad_or_default(
     ),
 )
 ```
+
+</TabItem>
+</Tabs>
 
 ## Available values
 
