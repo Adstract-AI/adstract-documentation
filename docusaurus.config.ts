@@ -2,7 +2,6 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
   title: "AdstractAI Platform",
@@ -10,7 +9,7 @@ const config: Config = {
   favicon: "img/logo-white-2.svg",
 
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
   url: "https://adstract-ai.github.io",
@@ -51,21 +50,26 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: "Adstract Platform",
+      title: "Adstract AI",
       logo: {
         alt: "Adstract Logo",
         src: "img/logo-white-2.svg",
       },
       items: [
+          {
+          href: "https://adstract.ai",
+          label: "Adstract.ai",
+          position: "right",
+        },
         {
           href: "https://github.com/Adstract-AI/adstract-library",
-          label: "GitHub",
+          label: "Adstract SDK",
           position: "right",
         },
       ],
     },
     footer: {
-      style: "dark",
+      style: "light",
       links: [
         {
           title: "Docs",
@@ -75,17 +79,16 @@ const config: Config = {
           ],
         },
         {
-          title: "Community",
+          title: "Products",
           items: [
-            // Replace these when you have them
-            { label: "GitHub Issues", href: "https://github.com/Adstract-AI/adstract-library/issues" },
+            { label: "Adstract.ai", href: "https://adstract.ai" },
+            { label: "Adstract SDK", href: "https://github.com/Adstract-AI/adstract-library" },
           ],
         },
         {
-          title: "More",
+          title: "Community",
           items: [
-            { label: "Adstract.ai", href: "https://adstract.ai" },
-            { label: "GitHub", href: "https://github.com/Adstract-AI/adstract-library" },
+            { label: "GitHub Issues", href: "https://github.com/Adstract-AI/adstract-library/issues" },
           ],
         },
       ],
@@ -99,4 +102,3 @@ const config: Config = {
 };
 
 export default config;
-
