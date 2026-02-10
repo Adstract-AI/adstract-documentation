@@ -5,25 +5,27 @@ import styles from './index.module.css';
 
 export default function Home() {
   return (
-    <Layout title="Choose Documentation" description="Choose SDK or API documentation">
+    <Layout title="Choose Documentation" description="Choose SDK documentation">
       <main className={styles.page}>
         <section className={styles.chooser}>
           <p className={styles.eyebrow}>Adstract Documentation</p>
           <h1 className={styles.title}>Choose Your Documentation</h1>
-          <p className={styles.subtitle}>Select SDK docs or HTTP API docs.</p>
+          <p className={styles.subtitle}>Start with SDK documentation, or review API documentation.</p>
 
           <div className={styles.cardGrid}>
             <Link className={styles.card} to="/overview">
-              <span className={styles.cardLabel}>Python SDK</span>
+              <span className={styles.cardLabel}>SDK</span>
               <strong className={styles.cardTitle}>SDK Documentation</strong>
               <span className={styles.cardCopy}>Get started with the client, requests, metadata, and errors.</span>
             </Link>
 
-            <Link className={styles.card} to="/api-overview">
-              <span className={styles.cardLabel}>REST API</span>
+            <div className={styles.card} aria-disabled="true">
+              <span className={styles.cardLabel}>API</span>
               <strong className={styles.cardTitle}>API Documentation</strong>
-              <span className={styles.cardCopy}>Explore endpoint contracts, schemas, validation rules, and examples.</span>
-            </Link>
+              <span className={styles.cardCopy}>
+                API support is coming soon, and API documentation will be published with that release.
+              </span>
+            </div>
           </div>
         </section>
       </main>

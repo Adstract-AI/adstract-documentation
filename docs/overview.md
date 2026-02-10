@@ -1,33 +1,43 @@
 ---
-title: Adstract AI Python SDK
-description: Python SDK for ad-enhanced prompts and ad acknowledgment reporting.
+title: Overview
+description: High-level overview of Adstract and how it fits into LLM-powered products.
 ---
 
-The Adstract AI Python SDK helps you inject ad-enhanced prompt content into your LLM flow and report ad usage back to Adstract.
+Adstract helps teams add sponsored content workflows to LLM-powered products.
+It is designed for prompt-driven experiences where ads can be inserted and
+tracked in a structured way.
 
-## Install
+## What Adstract provides
 
-```bash
-python -m pip install adstractai
-```
+At a high level, Adstract enables:
 
-## Requirements
+- ad-enabled prompt workflows for LLM experiences;
+- a platform model for publishers and inventory ownership;
+- account and platform lifecycle management; and
+- API key based access control for integration environments.
 
-- Python 3.10+
-- An Adstract API key
+## Typical lifecycle
 
-## Basic flow
+The standard onboarding lifecycle is:
 
-1. Create an `Adstract` client.
-2. Build an `AdRequestConfiguration` with `session_id` or `conversation`, plus `user_agent` and `x_forwarded_for`.
-3. Call `request_ad_or_default` to get an `EnhancementResult`.
-4. Send `EnhancementResult.prompt` to your LLM.
-5. Call `analyse_and_report` with the final LLM response.
+1. Sign up as a Publisher.
+2. Complete account verification.
+3. Create a platform.
+4. Create and manage API keys for that platform.
+5. Use Adstract in your product workflows.
 
-## Package surface
+## Who this is for
 
-- `Adstract` client for sync and async enhancement/reporting
-- `AdRequestConfiguration` for request input
-- `EnhancementResult` and `AdResponse` for response handling
-- `Conversation` and metadata models
-- Typed SDK error classes for runtime failures
+Adstract is intended for teams building:
+
+- chatbot products;
+- assistants and copilots;
+- vertical LLM applications; and
+- generalized AI platforms.
+
+## Next steps
+
+Continue with:
+
+- [Introduction](/introduction) for platform context.
+- [Platform](/signup) pages for signup, verification, platform creation, and API key onboarding.

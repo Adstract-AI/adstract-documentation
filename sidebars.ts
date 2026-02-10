@@ -1,39 +1,64 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  tutorialSidebar: [
-    {
-      type: 'category',
-      label: 'SDK Documentation',
-      items: [
+    tutorialSidebar: [
         {
-          type: 'category',
-          label: 'Getting Started',
-          items: ['overview', 'quickstart', 'configuration'],
+            type: 'category',
+            label: 'Getting Started',
+            items: ['overview', 'introduction', 'quickstart', 'pricing'],
         },
         {
-          type: 'category',
-          label: 'Core API',
-          items: ['client', 'request', 'responses', 'errors'],
+            type: 'category',
+            label: 'Platform',
+            items: [
+                'signup',
+                {
+                    type: 'category',
+                    label: 'Roles',
+                    items: ['roles-overview', 'role-user', 'role-publisher', 'role-advertiser'],
+                },
+                'verification',
+                'platform-creation',
+                'api-key'
+
+            ],
         },
         {
-          type: 'category',
-          label: 'Analytics and Reporting',
-          items: ['metadata', 'constraints'],
+            type: 'category',
+            label: 'Core Concepts',
+            items: ['sdk-installation', 'client', 'ad-request-configuration', 'enhancement-result', 'exception'],
         },
         {
-          type: 'category',
-          label: 'Contributing',
-          items: ['development'],
+            type: 'category',
+            label: 'Starting',
+            items: ['initialize-integration'],
         },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'HTTP API',
-      items: ['api-overview', 'api-ad-injection-start', 'api-schemas', 'api-errors'],
-    },
-  ],
+        {
+            type: 'category',
+            label: 'Enhancement',
+            items: ['request-ad-or-default', 'asynchronous-enhancement'],
+        },
+        {
+            type: 'category',
+            label: 'Analytics and Reporting',
+            items: ['analyse-and-report', 'asynchronous-analytics-and-reporting'],
+        },
+        {
+            type: 'category',
+            label: 'Finishing',
+            items: ['finishing-and-lifecycle'],
+        },
+        {
+            type: 'category',
+            label: 'Important and Disclaimers',
+            items: ['important-disclaimers'],
+        },
+        {
+            type: 'category',
+            label: 'Resources',
+            items: ['terms-of-condition', 'change-log', 'your-data'],
+        },
+    ],
 };
 
 export default sidebars;
