@@ -12,8 +12,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: "https://adstract-ai.github.io",
-  baseUrl: "/adstract-documentation/",
+  url: "https://docs.adstract.ai",
+  baseUrl: "/",
   trailingSlash: true,
 
   // GitHub pages deployment config.
