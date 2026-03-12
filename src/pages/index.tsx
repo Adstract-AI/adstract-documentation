@@ -22,13 +22,12 @@ export default function Home() {
             className={`${styles.logo} ${styles.logoDark}`}
           />
           <h1 className={styles.title}>
-            Monetization that feels{' '}
-            <span className={styles.highlight}>natural</span>
+            Developer{' '}
+            <span className={styles.highlight}>Documentation</span>
           </h1>
           <p className={styles.subtitle}>
-            Adstract helps teams add sponsored content to LLM-powered products.
-            Enhance prompts, track ad interactions, and earn — with a single SDK
-            integration.
+            Everything you need to integrate the Adstract SDK — from publisher
+            onboarding and API keys to prompt enhancement and ad acknowledgment.
           </p>
           <Link className={styles.cta} to="/overview">
             Get Started

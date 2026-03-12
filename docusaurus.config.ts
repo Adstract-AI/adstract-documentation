@@ -50,7 +50,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: "Adstract AI",
+      title: "Adstract Docs",
       logo: {
         alt: "Adstract Logo",
         src: "img/logo-white-2.svg",
