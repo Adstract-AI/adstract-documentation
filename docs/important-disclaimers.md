@@ -5,9 +5,9 @@ description: Critical integration notes for reporting, privacy, and payout flow.
 
 This page covers critical notes that should be understood before production use.
 
-## Reporting is required for full cycle completion
+## Acknowledgment is required for full cycle completion
 
-- `analyse_and_report` and `analyse_and_report_async` are not optional for complete production integration.
+- `acknowledge` and `acknowledge_async` are not optional for complete production integration.
 - They finalize the ad workflow cycle after the model response is produced.
 - This confirmation step is part of how publisher ad-placement opportunity is
   accounted for.
@@ -21,9 +21,9 @@ This page covers critical notes that should be understood before production use.
 
 ## Operational recommendation
 
-- Always call `analyse_and_report` or `analyse_and_report_async` after
+- Always call `acknowledge` or `acknowledge_async` after
   receiving final model output when enhancement succeeded.
-- Treat reporting as a required production path, not a debug-only step.
+- Treat acknowledgment as a required production path, not a debug-only step.
 
 ## Compliance and enforcement
 

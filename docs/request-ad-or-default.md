@@ -1,13 +1,14 @@
 ---
 title: Synchronous Enhancement
-description: Detailed guide for the request_ad_or_default method and its fallback-first behavior.
+description: Detailed guide for the request_ad method and its error handling behavior.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`request_ad_or_default` is the primary sync enhancement method in `Adstract`.
-It follows a fallback-first design: your application always receives an
+`request_ad` is the primary sync enhancement method in `Adstract`.
+By default it raises on failure. Pass `raise_exception=False` for
+fallback-first behavior: your application always receives an
 `EnhancementResult` and a usable `prompt` output.
 
 ## Method signature
@@ -16,9 +17,9 @@ It follows a fallback-first design: your application always receives an
 <TabItem value="python" label="Python" default>
 
 ```python
-result = client.request_ad_or_default(
+result = client.request_ad(
     prompt="How can I improve user retention?",
-    config=config,
+    context=context,
 )
 ```
 
@@ -32,15 +33,36 @@ result = client.request_ad_or_default(
   - Meaning: Original user prompt before enhancement.
   - Role: Source text Adstract attempts to enhance.
 
-- `config`
-  - Type: `AdRequestConfiguration`
+- `context`
+  - Type: `AdRequestContext`
   - Meaning: Request context object.
   - Required fields:
     - `session_id`
     - `user_agent`
-    - `x_forwarded_for`
+    - `user_ip`
 
-For full configuration details, see [AdRequestConfiguration](/ad-request-configuration).
+- `optional_context`
+  - Type: `OptionalContext | None`
+  - Meaning: Optional targeting context for improved ad relevance.
+  - Optional fields:
+    - `country` (ISO 3166-1 alpha-2 code, e.g. `"US"`)
+    - `region` (e.g. `"California"`)
+    - `city` (e.g. `"San Francisco"`)
+    - `asn` (Autonomous System Number)
+    - `age` (integer 0–120)
+    - `gender` (`"male"`, `"female"`, or `"other"`)
+
+- `raise_exception`
+  - Type: `bool`
+  - Default: `True`
+  - Meaning: Controls error handling behavior.
+  - Behavior:
+    - `True` (default): raises exceptions on any failure.
+    - `False`: captures failures in `EnhancementResult.error` and returns
+      original prompt as fallback.
+
+For full context details, see [AdRequestContext](/ad-request-configuration).
+For targeting details, see [OptionalContext](/optional-context).
 
 ## Output
 
@@ -48,15 +70,15 @@ This method returns an `EnhancementResult`.
 
 - `result.prompt`
   - Enhanced prompt on success.
-  - Original prompt on fallback.
+  - Original prompt on fallback (when `raise_exception=False`).
 - `result.success`
   - `True` when enhancement succeeds.
   - `False` when fallback path is used.
 - `result.error`
   - `None` on success.
   - Captured exception on fallback failure path.
-- `result.conversation`
-  - Resolved conversation context used for downstream continuity.
+- `result.session_id`
+  - Session identifier used for this request.
 - `result.ad_response`
   - Parsed response payload when available.
 
@@ -68,19 +90,28 @@ The method flow is:
 
 1. Build and validate request payload.
 2. Send enhancement request to Adstract.
-3. If enhancement is successful, return enhanced prompt.
-4. If enhancement fails or response is not successful, return fallback result.
+3. If enhancement is successful and an enhanced prompt is returned, return it.
+4. If the response status is `rejected`, raise (or capture) `PromptRejectedError`.
+5. If the response status is `no_fill`, raise (or capture) `NoFillError`.
+6. If any other failure occurs, raise (or capture) the appropriate exception.
 
-Fallback result means your app still gets a prompt and can continue its normal
-LLM flow with minimal branching logic.
+When `raise_exception=False`, fallback result means your app still gets a prompt
+and can continue its normal LLM flow with minimal branching logic.
 
 ## Exception behavior
 
-`request_ad_or_default` does not raise to the caller during normal enhancement
-flow. Failures are captured inside `EnhancementResult.error`.
+With `raise_exception=True` (default), `request_ad` raises on all failures:
 
-This design keeps integration code small and predictable, while preserving
-application continuity when enhancement is unavailable.
+- `MissingParameterError` — required parameters missing
+- `NetworkError` — transport/connectivity failure
+- `AuthenticationError` — authentication/authorization failure
+- `RateLimitError` — rate limit exceeded after retries
+- `ServerError` — server error after retries
+- `PromptRejectedError` — prompt not suitable for ad injection
+- `NoFillError` — no ad inventory available
+- `AdEnhancementError` — enhancement failed for another reason
+
+With `raise_exception=False`, all errors are captured in `EnhancementResult.error`.
 
 For full exception reference, see [Exception](/exception).
 
@@ -91,20 +122,41 @@ For full exception reference, see [Exception](/exception).
 
 ```python
 from adstractai import Adstract
-from adstractai.models import AdRequestConfiguration
+from adstractai.models import AdRequestContext
 
 client = Adstract(api_key="your-api-key")
 
-config = AdRequestConfiguration(
+context = AdRequestContext(
     session_id="session-abc",
     user_agent="Mozilla/5.0 (X11; Linux x86_64)",
-    x_forwarded_for="203.0.113.10",
+    user_ip="203.0.113.10",
 )
 
-result = client.request_ad_or_default(
+result = client.request_ad(
     prompt="How can I improve user retention?",
-    config=config,
+    context=context,
 )
+
+prompt_for_model = result.prompt
+```
+
+</TabItem>
+</Tabs>
+
+## Fallback pattern (raise_exception=False)
+
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
+
+```python
+result = client.request_ad(
+    prompt="How can I improve user retention?",
+    context=context,
+    raise_exception=False,
+)
+
+if not result.success:
+    print(f"Enhancement failed: {result.error}")
 
 prompt_for_model = result.prompt
 ```
@@ -116,4 +168,4 @@ prompt_for_model = result.prompt
 
 - Continue to [Asynchronous Enhancement](/asynchronous-enhancement) for the async enhancement counterpart.
 - Continue to [EnhancementResult](/enhancement-result) for result object details.
-- Continue to [Synchronous Analytics and Reporting](/analyse-and-report) to complete the reporting cycle.
+- Continue to [Synchronous Acknowledgment](/acknowledge) to complete the reporting cycle.

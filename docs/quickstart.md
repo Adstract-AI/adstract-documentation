@@ -12,7 +12,7 @@ This guide walks through a complete first integration:
 - configure credentials;
 - request ad-enhanced prompt content;
 - send that prompt to your model; and
-- report the final model response.
+- acknowledge the final model response.
 
 ## 1. Install the SDK
 
@@ -39,34 +39,36 @@ You can also pass `api_key` directly when creating the client.
 ## 3. Create your first enhancement request
 
 The example below demonstrates a production-style flow with explicit
-configuration, enhancement request, LLM call, and reporting.
+configuration, enhancement request, LLM call, and acknowledgment.
 
 <Tabs groupId="sdk-language">
 <TabItem value="python" label="Python" default>
 
 ```python
-from adstractai import AdRequestConfiguration, Adstract
+from adstractai import Adstract
+from adstractai.models import AdRequestContext
 from openai import OpenAI
 
-# Adstract client for prompt enhancement + reporting.
+# Adstract client for prompt enhancement + acknowledgment.
 client = Adstract()
 # LLM client.
 llm_client = OpenAI()
 
-result = client.request_ad_or_default(
+result = client.request_ad(
     prompt="How do I improve analytics in my LLM app?",
-    config=AdRequestConfiguration(
+    context=AdRequestContext(
         session_id="session-abc",
         user_agent=(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
             "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ),
-        x_forwarded_for="203.0.113.10",
+        user_ip="203.0.113.10",
     ),
+    raise_exception=False,
 )
 
 if not result.success:
-    # request_ad_or_default falls back to the original prompt on failure
+    # raise_exception=False falls back to the original prompt on failure
     # and stores the error object for inspection.
     print(f"Enhancement failed: {result.error}")
 
@@ -81,8 +83,8 @@ llm_result = llm_client.responses.create(
 # Extract the final text output from the model response.
 llm_response = llm_result.output_text
 
-# Report final output for analytics/acknowledgment.
-client.analyse_and_report(
+# Acknowledge final output for reporting.
+client.acknowledge(
     enhancement_result=result,
     llm_response=llm_response,
 )
@@ -99,11 +101,41 @@ Each request must include:
 
 - `session_id`
 - `user_agent`
-- `x_forwarded_for`
+- `user_ip`
 
-If required values are missing or empty, SDK raise SDK validation exceptions.
+If required values are missing or empty, the SDK raises validation exceptions.
 
-## 5. Async integration example
+## 5. Optional targeting context
+
+You can pass an `OptionalContext` for improved ad relevance:
+
+<Tabs groupId="sdk-language">
+<TabItem value="python" label="Python" default>
+
+```python
+from adstractai.models import OptionalContext
+
+result = client.request_ad(
+    prompt="How do I improve analytics in my LLM app?",
+    context=AdRequestContext(
+        session_id="session-abc",
+        user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+        user_ip="203.0.113.10",
+    ),
+    optional_context=OptionalContext(
+        country="US",
+        region="California",
+        city="San Francisco",
+        age=30,
+        gender="male",
+    ),
+)
+```
+
+</TabItem>
+</Tabs>
+
+## 6. Async integration example
 
 Use async methods in async application servers or worker pipelines:
 
@@ -112,26 +144,28 @@ Use async methods in async application servers or worker pipelines:
 
 ```python
 import asyncio
-from adstractai import AdRequestConfiguration, Adstract
+from adstractai import Adstract
+from adstractai.models import AdRequestContext
 from openai import AsyncOpenAI
 
 
 async def main() -> None:
-    # Adstract client for prompt enhancement + reporting.
+    # Adstract client for prompt enhancement + acknowledgment.
     client = Adstract()
     # Async LLM client.
     llm_client = AsyncOpenAI()
 
-    result = await client.request_ad_or_default_async(
+    result = await client.request_ad_async(
         prompt="Give me productivity tips",
-        config=AdRequestConfiguration(
+        context=AdRequestContext(
             session_id="session-abc",
             user_agent=(
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                 "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ),
-            x_forwarded_for="203.0.113.10",
+            user_ip="203.0.113.10",
         ),
+        raise_exception=False,
     )
 
     if not result.success:
@@ -145,7 +179,7 @@ async def main() -> None:
     # Extract the final text output from the model response.
     llm_response = llm_result.output_text
 
-    await client.analyse_and_report_async(enhancement_result=result, llm_response=llm_response)
+    await client.acknowledge_async(enhancement_result=result, llm_response=llm_response)
     await client.aclose()
 
 
@@ -155,16 +189,16 @@ asyncio.run(main())
 </TabItem>
 </Tabs>
 
-## 6. Method usage guidance
+## 7. Method usage guidance
 
-- `request_ad_or_default` and `request_ad_or_default_async` are the enhancement
-  entrypoints. They always return an `EnhancementResult`.
-- `analyse_and_report` and `analyse_and_report_async` are the reporting
-  entrypoints. Call them after you receive the final LLM output.
-- Validate `session_id`, `user_agent`, and `x_forwarded_for` before sending
-  requests.
+- `request_ad` and `request_ad_async` are the enhancement entrypoints.
+  By default they raise on failure; pass `raise_exception=False` to always
+  return an `EnhancementResult`.
+- `acknowledge` and `acknowledge_async` are the acknowledgment entrypoints.
+  Call them after you receive the final LLM output.
+- Validate `session_id`, `user_agent`, and `user_ip` before sending requests.
 - Always close SDK and LLM clients in long-running services.
 
-## 7. Where to go next
+## 8. Where to go next
 
 - [Pricing](/pricing) for current service pricing.

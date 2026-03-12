@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
         {
             type: 'category',
             label: 'Core Concepts',
-            items: ['sdk-installation', 'client', 'ad-request-configuration', 'enhancement-result', 'exception'],
+            items: ['sdk-installation', 'client', 'ad-request-configuration', 'optional-context', 'enhancement-result', 'exception'],
         },
         {
             type: 'category',
@@ -40,7 +40,7 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'category',
-            label: 'Analytics and Reporting',
+            label: 'Acknowledgment',
             items: ['analyse-and-report', 'asynchronous-analytics-and-reporting'],
         },
         {

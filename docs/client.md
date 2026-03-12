@@ -99,11 +99,11 @@ client = Adstract(
     - If provided, caller owns lifecycle and should close it.
 
 - `wrapping_type`
-  - Type: `"xml" | "plain" | None`
+  - Type: `"xml" | "plain" | "markdown" | None`
   - Purpose: Configures how Adstract instructs the LLM to wrap ad content,
     which directly affects how the final response should be analyzed.
   - Behavior:
-    - Supported values: `xml`, `plain`.
+    - Supported values: `xml`, `plain`, `markdown`.
     - If omitted, defaults to `xml`.
 
 ## Validation behavior
@@ -146,6 +146,6 @@ client = Adstract(api_key="your-api-key")
 ## Next steps
 
 - Continue to [Initialize Your Integration](/initialize-integration) to instantiate the client in the runtime flow.
-- Continue to [AdRequestConfiguration](/ad-request-configuration) for request-level configuration fields.
+- Continue to [AdRequestContext](/ad-request-configuration) for request-level configuration fields.
 - Continue to [EnhancementResult](/enhancement-result) for output handling.
 - Continue to [Exception](/exception) for error type behavior.

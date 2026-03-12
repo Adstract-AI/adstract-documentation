@@ -16,7 +16,7 @@ This class exists to make application handling deterministic:
 
 - your pipeline always receives a prompt to continue execution;
 - success and failure state are explicit via `success` and `error`;
-- conversation metadata is always preserved on the result; and
+- session metadata is always preserved on the result; and
 - backend response payload is available when present.
 
 ## Class shape
@@ -26,16 +26,16 @@ This class exists to make application handling deterministic:
 
 ```python
 from adstractai import Adstract
-from adstractai.models import AdRequestConfiguration
+from adstractai.models import AdRequestContext
 
 client = Adstract(api_key="your-api-key")
 
-result = client.request_ad_or_default(
+result = client.request_ad(
     prompt="Explain SOC 2 for startups.",
-    config=AdRequestConfiguration(
+    context=AdRequestContext(
         session_id="sess-100",
         user_agent="Mozilla/5.0 (X11; Linux x86_64)",
-        x_forwarded_for="203.0.113.10",
+        user_ip="203.0.113.10",
     ),
 )
 ```
@@ -52,9 +52,9 @@ result = client.request_ad_or_default(
     - Enhanced prompt when ad enhancement succeeds.
     - Original prompt when fallback is used.
 
-- `conversation`
-  - Type: `Conversation`
-  - Meaning: Resolved conversation context for tracking and reporting continuity.
+- `session_id`
+  - Type: `str`
+  - Meaning: Session identifier used for the enhancement request and downstream reporting continuity.
 
 - `ad_response`
   - Type: `AdResponse | None`
@@ -95,6 +95,6 @@ else:
 ## Next steps
 
 - Continue to [Initialize Your Integration](/initialize-integration) to initialize the runtime before enhancement calls.
-- Continue to [Synchronous Analytics and Reporting](/analyse-and-report) for sync reporting flow.
-- Continue to [Asynchronous Analytics and Reporting](/asynchronous-analytics-and-reporting) for async reporting flow.
+- Continue to [Synchronous Acknowledgment](/acknowledge) for sync reporting flow.
+- Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment) for async reporting flow.
 - Continue to [Exception](/exception) for runtime error type handling.

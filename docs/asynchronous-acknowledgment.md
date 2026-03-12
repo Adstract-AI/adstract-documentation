@@ -1,18 +1,18 @@
 ---
-title: Synchronous Acknowledgment
-description: Detailed guide for the acknowledge method and its reporting behavior.
+title: Asynchronous Acknowledgment
+description: Detailed guide for the acknowledge_async method and its reporting behavior.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`acknowledge` is the main synchronous reporting method in `Adstract`.
+`acknowledge_async` is the asynchronous reporting method in `Adstract`.
 It reports the final LLM response after enhancement and sends an acknowledgment
-payload to Adstract.
+payload to Adstract using async transport.
 
 ## Why this method is critical
 
-This method closes the full ad workflow cycle.
+This method closes the full ad workflow cycle in async pipelines.
 
 - It confirms that the enhancement flow reached final output handling.
 - It submits the required acknowledgment data for reporting.
@@ -25,7 +25,7 @@ This method closes the full ad workflow cycle.
 <TabItem value="python" label="Python" default>
 
 ```python
-client.acknowledge(
+await client.acknowledge_async(
     enhancement_result=result,
     llm_response=llm_response,
 )
@@ -68,11 +68,11 @@ The method flow is:
 1. Check whether enhancement succeeded.
 2. If enhancement did not succeed, reporting is skipped.
 3. If enhancement succeeded, build the acknowledgment payload.
-4. Send the acknowledgment payload to Adstract.
+4. Send the acknowledgment payload to Adstract asynchronously.
 
 ## Exception behavior
 
-With `raise_exception=True` (default), `acknowledge` raises on any reporting failure.
+With `raise_exception=True` (default), `acknowledge_async` raises on any reporting failure.
 
 With `raise_exception=False`, errors are logged but not raised, avoiding disruption
 to the main application flow.
@@ -86,34 +86,42 @@ and compliance verification. The flow is designed with privacy and safety
 constraints in mind, and all analytics and compliance metrics are computed
 on the backend.
 
-## Minimal integration pattern
+## Minimal async integration pattern
 
 <Tabs groupId="sdk-language">
 <TabItem value="python" label="Python" default>
 
 ```python
+import asyncio
 from adstractai import Adstract
 from adstractai.models import AdRequestContext
 
-client = Adstract(api_key="your-api-key")
 
-context = AdRequestContext(
-    session_id="session-abc",
-    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
-    user_ip="203.0.113.10",
-)
+async def main() -> None:
+    client = Adstract(api_key="your-api-key")
 
-result = client.request_ad(
-    prompt="How can I improve user retention?",
-    context=context,
-)
+    context = AdRequestContext(
+        session_id="session-abc",
+        user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+        user_ip="203.0.113.10",
+    )
 
-llm_response = "Your final model output here"
+    result = await client.request_ad_async(
+        prompt="How can I improve user retention?",
+        context=context,
+    )
 
-client.acknowledge(
-    enhancement_result=result,
-    llm_response=llm_response,
-)
+    llm_response = "Your final model output here"
+
+    await client.acknowledge_async(
+        enhancement_result=result,
+        llm_response=llm_response,
+    )
+
+    await client.aclose()
+
+
+asyncio.run(main())
 ```
 
 </TabItem>
@@ -121,6 +129,6 @@ client.acknowledge(
 
 ## Next steps
 
-- Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment).
+- Continue to [Synchronous Acknowledgment](/acknowledge).
 - Continue to [Exception](/exception) for exception behavior details.
 - Continue to [Important and Disclaimers](/important-disclaimers) for critical integration caveats.

@@ -17,8 +17,7 @@ Adstract sits between your user prompt and your model call:
 1. Your app sends the original prompt to Adstract.
 2. Adstract returns an enhanced prompt with ad instructions embedded.
 3. Your app sends the enhanced prompt to your LLM provider.
-4. Your app reports the final model output back to Adstract for analysis and
-   acknowledgment tracking.
+4. Your app reports the final model output back to Adstract for acknowledgment.
 
 This flow keeps your application in control of LLM execution while letting
 Adstract handle ad-enhancement and reporting logic.
@@ -40,9 +39,9 @@ At minimum, each request needs:
 - `prompt`: user input text;
 - `session_id`: session/conversation identifier;
 - `user_agent`: client device/browser agent string; and
-- `x_forwarded_for`: client IP-forwarding value used for metadata enrichment.
+- `user_ip`: client IP address used for metadata enrichment.
 
-After enhancement, you submit the final LLM response back via reporting calls.
+After enhancement, you submit the final LLM response back via `acknowledge` or `acknowledge_async`.
 
 ## Next steps
 

@@ -3,7 +3,7 @@ title: Your data
 description: What data Adstract uses and what data Adstract does not use.
 ---
 
-Adstract uses only the data required to run enhancement and reporting flows.
+Adstract uses only the data required to run enhancement and acknowledgment flows.
 
 ## Data Adstract uses
 
@@ -13,19 +13,28 @@ Adstract uses only the data required to run enhancement and reporting flows.
 
 - `user_agent`
   - Used to derive client metadata context.
-  - Supports analysis/reporting quality and request context integrity.
+  - Supports request context integrity.
 
-- `x_forwarded_for`
+- `user_ip`
   - Used as request-origin network context.
   - Supports metadata generation and reporting context.
 
-## Data Adstract does not use
-
 - `llm_response`
-  - The raw final model response content is not sent to backend reporting as-is.
-  - Reporting uses derived analytics and tracking metadata instead.
+  - The final model response text is sent to the backend as part of
+    the acknowledgment flow for compliance verification.
+  - All analytics and compliance metrics are computed on the backend.
+
+## Optional targeting data
+
+When provided via `OptionalContext`, the following fields may also be used:
+
+- `country`, `region`, `city` — geographic targeting
+- `asn` — network context
+- `age`, `gender` — demographic targeting
+
+These fields are entirely optional and are used only to improve ad relevance.
 
 ## Why this matters
 
-- Reduces unnecessary exposure of model output content.
+- Only the data required to run the integration flow is used.
 - Supports privacy and data-protection expectations in production integrations.

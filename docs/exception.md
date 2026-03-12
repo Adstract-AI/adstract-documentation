@@ -11,17 +11,19 @@ All SDK exceptions inherit from `AdSDKError`.
 The exception model is split into:
 
 - validation/input exceptions raised before or during request construction;
-- transport/HTTP exceptions raised while communicating with Adstract; and
-- response parsing exceptions raised when server payloads are invalid.
+- transport/HTTP exceptions raised while communicating with Adstract;
+- response parsing exceptions raised when server payloads are invalid; and
+- ad enhancement exceptions raised when the enhancement pipeline does not produce an ad.
 
 ## SDK design approach
 
 Adstract is designed for straightforward integration with minimal application
 code changes.
 
-- The fallback methods do not raise to the caller on enhancement failure.
-- Instead, they always return an `EnhancementResult`.
-- This keeps control flow simple and predictable.
+- By default, `request_ad` and `request_ad_async` raise on any failure.
+- Set `raise_exception=False` to enable fallback-first behavior: the method
+  always returns an `EnhancementResult` and captures any failure in `error`.
+- This keeps control flow simple and predictable when graceful degradation is preferred.
 - It also preserves fallback behavior so publisher applications can continue
   running close to their original pre-Adstract flow when enhancement fails.
 
@@ -40,15 +42,14 @@ code changes.
     - Typical trigger points:
         - invalid `api_key` during `Adstract(...)` initialization;
         - invalid `wrapping_type`;
-        - invalid `user_agent` metadata input;
-        - metadata build failures.
+        - invalid `user_agent` or other parameter validation failures.
 
 - `MissingParameterError`
     - Raised when required request parameters are missing/empty.
     - Typical trigger points:
         - missing `session_id`;
         - missing/empty `user_agent`;
-        - missing/empty `x_forwarded_for`.
+        - missing/empty `user_ip`.
 
 ## Network and HTTP exceptions
 
@@ -75,10 +76,25 @@ code changes.
         - invalid JSON response body;
         - response JSON does not match expected SDK model shape.
 
+## Ad enhancement exceptions
+
+- `AdEnhancementError`
+    - Raised when the ad enhancement pipeline did not produce a usable result
+      for a reason not covered by a more specific subclass.
+
+- `PromptRejectedError` (subclass of `AdEnhancementError`)
+    - Raised when the ad system determined the prompt content is not appropriate
+      for advertisement placement (`status='rejected'`).
+
+- `NoFillError` (subclass of `AdEnhancementError`)
+    - Raised when the prompt was suitable for ad injection, but no matching ad
+      inventory was available to fill the opportunity (`status='no_fill'`).
+
 ## Fallback method behavior
 
-`request_ad_or_default` and `request_ad_or_default_async` capture failures and
-return them in `EnhancementResult.error` instead of raising to the caller.
+When `raise_exception=False` is passed to `request_ad` or `request_ad_async`,
+failures are captured inside `EnhancementResult.error` instead of raising to
+the caller.
 
 ## Exception handling pattern
 
@@ -86,18 +102,29 @@ return them in `EnhancementResult.error` instead of raising to the caller.
 <TabItem value="python" label="Python" default>
 
 ```python
-from adstractai import AdRequestConfiguration, Adstract
-from adstractai.errors import AuthenticationError, MissingParameterError, NetworkError, RateLimitError, ServerError
+from adstractai import Adstract
+from adstractai.models import AdRequestContext
+from adstractai.errors import (
+    AdEnhancementError,
+    AuthenticationError,
+    MissingParameterError,
+    NetworkError,
+    NoFillError,
+    PromptRejectedError,
+    RateLimitError,
+    ServerError,
+)
 
 client = Adstract(api_key="your-api-key")
 
-result = client.request_ad_or_default(
+result = client.request_ad(
     prompt="Explain unit economics",
-    config=AdRequestConfiguration(
+    context=AdRequestContext(
         session_id="sess-600",
         user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-        x_forwarded_for="203.0.113.40",
+        user_ip="203.0.113.40",
     ),
+    raise_exception=False,
 )
 
 if isinstance(result.error, AuthenticationError):
@@ -110,6 +137,12 @@ elif isinstance(result.error, ServerError):
     print("Server error")
 elif isinstance(result.error, NetworkError):
     print("Network failure")
+elif isinstance(result.error, PromptRejectedError):
+    print("Prompt rejected — not suitable for ad injection")
+elif isinstance(result.error, NoFillError):
+    print("No fill — no ad inventory available")
+elif isinstance(result.error, AdEnhancementError):
+    print("Ad enhancement failed")
 ```
 
 </TabItem>
@@ -118,6 +151,6 @@ elif isinstance(result.error, NetworkError):
 ## Next steps
 
 - Continue to [Initialize Your Integration](/initialize-integration) to begin the integration flow with a client instance.
-- Continue to [Synchronous Analytics and Reporting](/analyse-and-report) for sync reporting behavior.
-- Continue to [Asynchronous Analytics and Reporting](/asynchronous-analytics-and-reporting) for async reporting behavior.
+- Continue to [Synchronous Acknowledgment](/acknowledge) for sync reporting behavior.
+- Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment) for async reporting behavior.
 - Continue to [Important and Disclaimers](/important-disclaimers) for compliance and policy-critical guidance.
