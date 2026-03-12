@@ -29,6 +29,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Code block background — near black in dark mode only */
+[data-theme='dark'] pre.prism-code {
+  background-color: #0d0d0d !important;
+}
+
 .footer__links {
   justify-content: center;
   text-align: center;

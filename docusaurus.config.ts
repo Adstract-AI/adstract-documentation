@@ -54,6 +54,7 @@ const config: Config = {
       logo: {
         alt: "Adstract Logo",
         src: "img/logo-white-2.svg",
+        srcDark: "img/logo-white.svg",
       },
       items: [
           {
@@ -95,8 +96,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Adstract AI.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.oneDark,
+      darkTheme: prismThemes.oneDark,
     },
   } satisfies Preset.ThemeConfig,
 };

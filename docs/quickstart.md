@@ -49,9 +49,7 @@ from adstractai import Adstract
 from adstractai.models import AdRequestContext
 from openai import OpenAI
 
-# Adstract client for prompt enhancement + acknowledgment.
 client = Adstract()
-# LLM client.
 llm_client = OpenAI()
 
 result = client.request_ad(
@@ -68,22 +66,17 @@ result = client.request_ad(
 )
 
 if not result.success:
-    # raise_exception=False falls back to the original prompt on failure
-    # and stores the error object for inspection.
     print(f"Enhancement failed: {result.error}")
 
 prompt_for_model = result.prompt
 print(prompt_for_model)
 
-# LLM call using the enhanced prompt.
 llm_result = llm_client.responses.create(
     model="gpt-4.1-mini",
     input=prompt_for_model,
 )
-# Extract the final text output from the model response.
 llm_response = llm_result.output_text
 
-# Acknowledge final output for reporting.
 client.acknowledge(
     enhancement_result=result,
     llm_response=llm_response,
@@ -150,9 +143,7 @@ from openai import AsyncOpenAI
 
 
 async def main() -> None:
-    # Adstract client for prompt enhancement + acknowledgment.
     client = Adstract()
-    # Async LLM client.
     llm_client = AsyncOpenAI()
 
     result = await client.request_ad_async(
@@ -171,12 +162,10 @@ async def main() -> None:
     if not result.success:
         print(f"Enhancement failed: {result.error}")
 
-    # Async LLM call using the enhanced prompt.
     llm_result = await llm_client.responses.create(
         model="gpt-4.1-mini",
         input=result.prompt,
     )
-    # Extract the final text output from the model response.
     llm_response = llm_result.output_text
 
     await client.acknowledge_async(enhancement_result=result, llm_response=llm_response)
