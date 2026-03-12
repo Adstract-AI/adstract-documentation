@@ -83,6 +83,7 @@ const config: Config = {
           title: "Products",
           items: [
             { label: "Adstract.ai", href: "https://adstract.ai" },
+            { label: "Adstract Hub", href: "https://hub.adstract.ai" },
             { label: "Adstract SDK", href: "https://github.com/Adstract-AI/adstract-library" },
           ],
         },

@@ -40,7 +40,5 @@ Adstract is intended for teams building:
 
 ## Next steps
 
-Continue with:
-
-- [Introduction](/introduction) for platform context.
-- [Platform](/signup) pages for signup, verification, platform creation, and API key onboarding.
+- Continue to [Introduction](/introduction) for platform context and SDK architecture.
+- Continue to [Adstract Hub](/adstract-hub) to experience the platform without any implementation.
