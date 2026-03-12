@@ -1,56 +1,51 @@
 ---
-title: API Key
-description: Step-by-step process to get an Adstract API key as a Publisher.
+title: API Keys
+description: Overview of the two API key types available to Publishers — Sandbox and Billing.
 ---
 
-This page explains the full process for creating and managing an Adstract API key.
-API key access is tied to a **Publisher** account and a created platform.
+Adstract uses two types of API keys for Publisher accounts.
+The type available to you depends on your verification status.
 
-## Before you start
+## Key types
 
-Complete all prerequisites first:
+### Sandbox Key
 
-- [Signup](/signup) as `Publisher`.
-- Complete [Verification](/verification) (administrator approval).
-- Complete [Platform Creation](/platform-creation) so you have a platform.
+Available **before** verification. Used to integrate the SDK, test your setup,
+and generate the traffic required for verification eligibility.
 
-Platform entry point: [adstract.ai](https://adstract.ai/).
+Traffic from Sandbox keys is **never paid**.
 
-## API key onboarding flow
+See [Sandbox Key](/sandbox-key) for full creation and usage instructions.
 
-1. In the `Platform` page, click the platform for which you want an API key.
-2. Scroll down to the `API Keys` section.
-3. Click `Create API Key`.
-4. Fill the API key creation form:
-   - `Label`
-   - `Description`
-   - `Permission Type`
-5. Click `Create`.
-6. In the next window, copy the API key immediately.
-   - This is the last time the full key is shown for security reasons.
-7. Confirm and close the key-created window.
-8. The new key appears in the `API Keys` section list.
+### Billing Key
 
-## Security note
+Available **only after** verification is approved. All valid traffic generated
+with a Billing key is eligible for payment.
 
-- API keys are shown in full only once.
-- Store the key securely after creation.
+See [Billing Key](/billing-key) for full creation and usage instructions.
 
-## Revoke an API key
+## Summary
 
-If you no longer want to use an API key:
+| | Sandbox Key | Billing Key |
+|---|---|---|
+| Available before verification | Yes | No |
+| Traffic is paid | No | Yes |
+| Purpose | Integration and traffic proof | Production revenue |
+
+## Revoking an API key
+
+To revoke any key type:
 
 1. Go to the `API Keys` section of the platform.
 2. Find the key item.
 3. Click `Revoke` in the far-right action column.
 
-This is the standard successful flow for API key creation and lifecycle management.
+## Security note
 
-## You are ready for code integration
-
-You now have everything required to start setting up the actual SDK integration
-code in your application.
+- API keys are shown in full only once at creation time.
+- Store keys securely immediately after creation.
 
 ## Next steps
 
-- Continue to [SDK Installation](/sdk-installation).
+- If you are pre-verification, see [Sandbox Key](/sandbox-key).
+- If you are post-verification, see [Billing Key](/billing-key).

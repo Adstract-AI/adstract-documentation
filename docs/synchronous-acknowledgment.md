@@ -6,9 +6,9 @@ description: Detailed guide for the acknowledge method and its reporting behavio
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`acknowledge` is the main synchronous reporting method in `Adstract`.
-It reports the final LLM response after enhancement and sends an acknowledgment
-payload to Adstract.
+The synchronous acknowledgment method is the primary way to report the final LLM
+response back to Adstract after enhancement. It sends an acknowledgment payload
+to close the ad workflow cycle.
 
 ## Why this method is critical
 

@@ -7,9 +7,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 The async enhancement method is the asynchronous counterpart of the sync
-enhancement flow in `Adstract`.
-
-By default it raises on failure. Pass `raise_exception=False` for
+enhancement flow in `Adstract`. By default it raises on failure. Pass `raise_exception=False` for
 fallback-first behavior: your application always receives an
 `EnhancementResult` and a usable `prompt` output.
 

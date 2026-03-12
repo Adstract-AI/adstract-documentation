@@ -101,6 +101,9 @@ the caller.
 <Tabs groupId="sdk-language">
 <TabItem value="python" label="Python" default>
 
+<Tabs groupId="raise-exception">
+<TabItem value="false" label="Fallback — errors captured in result" default>
+
 ```python
 from adstractai import Adstract
 from adstractai.models import AdRequestContext
@@ -146,11 +149,60 @@ elif isinstance(result.error, AdEnhancementError):
 ```
 
 </TabItem>
+<TabItem value="true" label="Raising — exceptions thrown on failure">
+
+```python
+from adstractai import Adstract
+from adstractai.models import AdRequestContext
+from adstractai.errors import (
+    AdEnhancementError,
+    AuthenticationError,
+    MissingParameterError,
+    NetworkError,
+    NoFillError,
+    PromptRejectedError,
+    RateLimitError,
+    ServerError,
+)
+
+client = Adstract(api_key="your-api-key")
+
+try:
+    result = client.request_ad(
+        prompt="Explain unit economics",
+        context=AdRequestContext(
+            session_id="sess-600",
+            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+            user_ip="203.0.113.40",
+        ),
+    )
+except AuthenticationError:
+    print("Authentication failed")
+except MissingParameterError:
+    print("Missing required request field")
+except RateLimitError:
+    print("Rate limited")
+except ServerError:
+    print("Server error")
+except NetworkError:
+    print("Network failure")
+except PromptRejectedError:
+    print("Prompt rejected — not suitable for ad injection")
+except NoFillError:
+    print("No fill — no ad inventory available")
+except AdEnhancementError:
+    print("Ad enhancement failed")
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
 </Tabs>
 
 ## Next steps
 
 - Continue to [Initialize Your Integration](/initialize-integration) to begin the integration flow with a client instance.
-- Continue to [Synchronous Acknowledgment](/acknowledge) for sync reporting behavior.
+- Continue to [Synchronous Acknowledgment](/synchronous-acknowledgment) for sync reporting behavior.
 - Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment) for async reporting behavior.
 - Continue to [Important and Disclaimers](/important-disclaimers) for compliance and policy-critical guidance.

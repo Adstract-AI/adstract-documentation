@@ -17,10 +17,15 @@ const sidebars: SidebarsConfig = {
                     label: 'Roles',
                     items: ['roles-overview', 'role-user', 'role-publisher', 'role-advertiser'],
                 },
-                'verification',
                 'platform-creation',
-                'api-key'
-
+                {
+                    type: 'category',
+                    label: 'API Keys',
+                    link: {type: 'doc', id: 'api-key'},
+                    items: ['sandbox-key', 'billing-key'],
+                },
+                'beneficiary',
+                'verification',
             ],
         },
         {
@@ -36,12 +41,12 @@ const sidebars: SidebarsConfig = {
         {
             type: 'category',
             label: 'Enhancement',
-            items: ['request-ad-or-default', 'asynchronous-enhancement'],
+            items: ['synchronous-enhancement', 'asynchronous-enhancement'],
         },
         {
             type: 'category',
             label: 'Acknowledgment',
-            items: ['analyse-and-report', 'asynchronous-analytics-and-reporting'],
+            items: ['synchronous-acknowledgment', 'asynchronous-acknowledgment'],
         },
         {
             type: 'category',

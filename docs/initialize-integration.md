@@ -30,5 +30,5 @@ client = Adstract(api_key="your-api-key")
 
 ## Next steps
 
-- Continue to [Synchronous Enhancement](/request-ad-or-default).
+- Continue to [Synchronous Enhancement](/synchronous-enhancement).
 - Continue to [Asynchronous Enhancement](/asynchronous-enhancement).

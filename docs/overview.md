@@ -18,19 +18,22 @@ At a high level, Adstract enables:
 
 ## Typical lifecycle
 
-The standard onboarding lifecycle is:
+The standard Publisher onboarding lifecycle is:
 
 1. Sign up as a Publisher.
-2. Complete account verification.
-3. Create a platform.
-4. Create and manage API keys for that platform.
-5. Use Adstract in your product workflows.
+2. Create a platform and ensure it is active.
+3. Create a **Sandbox** API key.
+4. Integrate the SDK into your product workflows using the Sandbox key.
+5. Reach 200 unique ad clicks (traffic is not paid at this stage).
+6. Complete your profile by providing a valid beneficiary (payment details).
+7. Request verification — Adstract reviews and approves your account.
+8. After approval, create a **Billing** API key and swap it in for paid production traffic.
 
 ## Who this is for
 
 Adstract is intended for teams building:
 
-- chatbot products;
+- conversational AI applications;
 - assistants and copilots;
 - vertical LLM applications; and
 - generalized AI platforms.

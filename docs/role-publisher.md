@@ -12,7 +12,7 @@ can be placed in LLM-powered experiences.
 
 Examples:
 
-- chatbots;
+- conversational AI applications;
 - assistants;
 - prompt-based workflows; and
 - any product where prompts are sent to an LLM.
@@ -23,8 +23,20 @@ Publisher is the role used in the current API key acquisition flow.
 
 If you want to integrate the SDK, choose `Publisher` during signup.
 
+## Publisher onboarding journey
+
+The Publisher path from signup to paid production traffic is:
+
+1. **Sign up** as Publisher and create a platform. See [Platform Creation](/platform-creation).
+2. **Create a Sandbox key**. See [Sandbox Key](/sandbox-key).
+3. **Integrate the SDK** using the Sandbox key. See [Quickstart](/quickstart).
+4. **Generate 200 unique ad clicks** (traffic is not paid at this stage).
+5. **Set up a beneficiary** (payment details). See [Beneficiary Setup](/beneficiary).
+6. **Request verification** — Adstract reviews and approves. See [Verification](/verification).
+7. **Create a Billing key** after approval and swap it in for paid production traffic. See [Billing Key](/billing-key).
+
 ## Responsibilities
 
 - Integrate Adstract into your prompt flow.
 - Provide required client/session metadata.
-- Use enhancement and reporting methods according to SDK documentation.
+- Use enhancement and acknowledgment methods according to SDK documentation.

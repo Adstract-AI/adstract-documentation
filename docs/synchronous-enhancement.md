@@ -6,10 +6,10 @@ description: Detailed guide for the request_ad method and its error handling beh
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`request_ad` is the primary sync enhancement method in `Adstract`.
-By default it raises on failure. Pass `raise_exception=False` for
-fallback-first behavior: your application always receives an
-`EnhancementResult` and a usable `prompt` output.
+The synchronous enhancement method is the primary way to request an ad-enhanced
+prompt from Adstract. By default it raises on failure. Pass `raise_exception=False`
+for fallback-first behavior: your application always receives an `EnhancementResult`
+and a usable prompt output.
 
 ## Method signature
 
@@ -115,10 +115,39 @@ With `raise_exception=False`, all errors are captured in `EnhancementResult.erro
 
 For full exception reference, see [Exception](/exception).
 
-## Minimal integration pattern
+## Integration pattern
 
 <Tabs groupId="sdk-language">
 <TabItem value="python" label="Python" default>
+
+<Tabs groupId="raise-exception">
+<TabItem value="true" label="Raising — exceptions thrown on failure" default>
+
+```python
+from adstractai import Adstract
+from adstractai.models import AdRequestContext
+from adstractai.errors import AdSDKError
+
+client = Adstract(api_key="your-api-key")
+
+context = AdRequestContext(
+    session_id="session-abc",
+    user_agent="Mozilla/5.0 (X11; Linux x86_64)",
+    user_ip="203.0.113.10",
+)
+
+try:
+    result = client.request_ad(
+        prompt="How can I improve user retention?",
+        context=context,
+    )
+    prompt_for_model = result.prompt
+except AdSDKError:
+    prompt_for_model = "How can I improve user retention?"
+```
+
+</TabItem>
+<TabItem value="false" label="Fallback — errors captured in result">
 
 ```python
 from adstractai import Adstract
@@ -135,23 +164,6 @@ context = AdRequestContext(
 result = client.request_ad(
     prompt="How can I improve user retention?",
     context=context,
-)
-
-prompt_for_model = result.prompt
-```
-
-</TabItem>
-</Tabs>
-
-## Fallback pattern (raise_exception=False)
-
-<Tabs groupId="sdk-language">
-<TabItem value="python" label="Python" default>
-
-```python
-result = client.request_ad(
-    prompt="How can I improve user retention?",
-    context=context,
     raise_exception=False,
 )
 
@@ -164,8 +176,11 @@ prompt_for_model = result.prompt
 </TabItem>
 </Tabs>
 
+</TabItem>
+</Tabs>
+
 ## Next steps
 
 - Continue to [Asynchronous Enhancement](/asynchronous-enhancement) for the async enhancement counterpart.
 - Continue to [EnhancementResult](/enhancement-result) for result object details.
-- Continue to [Synchronous Acknowledgment](/acknowledge) to complete the reporting cycle.
+- Continue to [Synchronous Acknowledgment](/synchronous-acknowledgment) to complete the reporting cycle.

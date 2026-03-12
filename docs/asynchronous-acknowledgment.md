@@ -6,9 +6,9 @@ description: Detailed guide for the acknowledge_async method and its reporting b
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`acknowledge_async` is the asynchronous reporting method in `Adstract`.
-It reports the final LLM response after enhancement and sends an acknowledgment
-payload to Adstract using async transport.
+The asynchronous acknowledgment method reports the final LLM response back to
+Adstract after enhancement using async transport. It sends an acknowledgment
+payload to close the ad workflow cycle in async pipelines.
 
 ## Why this method is critical
 
@@ -129,6 +129,6 @@ asyncio.run(main())
 
 ## Next steps
 
-- Continue to [Synchronous Acknowledgment](/acknowledge).
+- Continue to [Synchronous Acknowledgment](/synchronous-acknowledgment).
 - Continue to [Exception](/exception) for exception behavior details.
 - Continue to [Important and Disclaimers](/important-disclaimers) for critical integration caveats.

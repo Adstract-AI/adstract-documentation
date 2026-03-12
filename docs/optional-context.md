@@ -118,5 +118,5 @@ result = client.request_ad(
 ## Next steps
 
 - Continue to [AdRequestContext](/ad-request-configuration) for required request context fields.
-- Continue to [Synchronous Enhancement](/request-ad-or-default) for the full request flow.
+- Continue to [Synchronous Enhancement](/synchronous-enhancement) for the full request flow.
 - Continue to [Asynchronous Enhancement](/asynchronous-enhancement) for async usage.
