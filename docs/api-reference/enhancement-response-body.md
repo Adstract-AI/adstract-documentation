@@ -1,37 +1,66 @@
 ---
-title: Response Body
-description: Full field reference for the Adstract Ad Injection response payload and HTTP status codes.
+title: Enhancement Response Body
+description: Full field reference for the Adstract ad enhancement response structure.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The response body has the same shape for all status codes. Always check
-`success` and `status` to determine how to proceed.
+The ad enhancement response has the same body shape across successful
+enhancement outcomes. Always check both `success` and `status`.
 
-## Response body
+## Structure
 
 ```json
 {
-  "ad_request_id": "55c59ce2-a31f-4ce4-95b3-f930fd9cd564",
-  "ad_response_id": "55c59ce2-a31f-4ce4-95b3-f930fd9cd564",
-  "status": "ok",
-  "success": true,
-  "execution_time_ms": 1987.964153289795,
-  "enhanced_prompt": "You are an AI assistant that integrates advertisements...",
-  "product_name": "Adstract – LLM Advertising"
+  "ad_request_id": "string",
+  "ad_response_id": "string",
+  "status": "string",
+  "success": "boolean",
+  "execution_time_ms": "number",
+  "enhanced_prompt": "string | null",
+  "product_name": "string | null"
 }
 ```
 
-| Field | Type | Description |
-|---|---|---|
-| `ad_request_id` | string (UUID) | Unique identifier for the ad request. Used in the acknowledgment step. |
-| `ad_response_id` | string (UUID) | Unique identifier for the ad response. |
-| `status` | string | `"ok"`, `"rejected"`, or `"no_fill"` depending on the outcome. |
-| `success` | boolean | `true` only when `status` is `"ok"` and an ad was injected. |
-| `execution_time_ms` | number | Server-side processing time in milliseconds. |
-| `enhanced_prompt` | string \| null | The enhanced prompt to pass to your LLM. `null` when no ad was injected. |
-| `product_name` | string \| null | Display name of the Adstract product that handled the request. `null` when no ad was injected. |
+## `ad_request_id`
+
+- Type: `string`
+- Description: Unique identifier for the enhancement request.
+
+## `ad_response_id`
+
+- Type: `string`
+- Description: Unique identifier for the enhancement result. This value is
+  required for acknowledgment.
+
+## `status`
+
+- Type: `string`
+- Description: Outcome label returned by the API. Expected values are `ok`,
+  `rejected`, and `no_fill`.
+
+## `success`
+
+- Type: `boolean`
+- Description: `true` only when an ad was successfully injected.
+
+## `execution_time_ms`
+
+- Type: `number`
+- Description: Server-side processing time in milliseconds.
+
+## `enhanced_prompt`
+
+- Type: `string | null`
+- Description: The prompt to send to your LLM. This is `null` when no ad was
+  injected.
+
+## `product_name`
+
+- Type: `string | null`
+- Description: Name of the product associated with the injected ad flow. This
+  is `null` when no ad was injected.
 
 ## `status` values by HTTP code
 
@@ -41,8 +70,8 @@ The response body has the same shape for all status codes. Always check
 | `201 Created` | `"rejected"` | `false` | `null` | `null` |
 | `202 Accepted` | `"no_fill"` | `false` | `null` | `null` |
 
-See [Enhancement Status Codes](/api-reference/enhancement-status-codes) for a
-full breakdown of every code.
+See [Enhancement Status Codes](/api-reference/enhancement-status-codes) for the
+full meaning of each response code.
 
 ## Handling all cases
 
@@ -52,7 +81,7 @@ full breakdown of every code.
 ```js
 const originalPrompt = "What are some good ways to advertise with AI?";
 
-const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
+const response = await fetch("https://api.adstract.ai/api/ad-injection/start/", {
   method: "POST",
   headers: {
     "X-Adstract-API-Key": "your-api-key",
@@ -86,7 +115,7 @@ import httpx
 original_prompt = "What are some good ways to advertise with AI?"
 
 response = httpx.post(
-    "https://api.adstract.ai/ad-injection/start/",
+    "https://api.adstract.ai/api/ad-injection/start/",
     headers={
         "X-Adstract-API-Key": "your-api-key",
         "Content-Type": "application/json",
@@ -112,7 +141,7 @@ else:
 
 ```bash
 STATUS=$(curl -s -o /tmp/adstract_body.json -w "%{http_code}" \
-  https://api.adstract.ai/ad-injection/start/ \
+  https://api.adstract.ai/api/ad-injection/start/ \
   -H "X-Adstract-API-Key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -136,6 +165,6 @@ fi
 
 ## Next steps
 
-- [Enhancement Status Codes](/api-reference/enhancement-status-codes) — detailed breakdown of every HTTP status code returned by ad enhancement.
-- [Ad Injection](/api-reference/ad-injection) — endpoint overview and integration flow.
-- [Request Body](/api-reference/api-request) — full request payload reference.
+- [Acknowledgment Request Body](/api-reference/acknowledgment-request-body)
+- [Enhancement Status Codes](/api-reference/enhancement-status-codes)
+- [Ad Injection](/api-reference/ad-injection)

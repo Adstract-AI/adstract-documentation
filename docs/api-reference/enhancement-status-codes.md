@@ -126,6 +126,6 @@ The common integration pattern is:
 ## Next steps
 
 - [Ad Injection](/api-reference/ad-injection)
-- [Response Body](/api-reference/api-response)
+- [Enhancement Response Body](/api-reference/enhancement-response-body)
 - [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes)
 - [Ad Acknowledgment](/api-reference/ad-acknowledgment)

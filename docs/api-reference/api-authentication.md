@@ -22,7 +22,7 @@ Include this header on every request:
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
+const response = await fetch("https://api.adstract.ai/api/ad-injection/start/", {
   method: "POST",
   headers: {
     "X-Adstract-API-Key": "your-api-key",
@@ -39,7 +39,7 @@ const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
 import httpx
 
 response = httpx.post(
-    "https://api.adstract.ai/ad-injection/start/",
+    "https://api.adstract.ai/api/ad-injection/start/",
     headers={
         "X-Adstract-API-Key": "your-api-key",
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ response = httpx.post(
 <TabItem value="curl" label="cURL">
 
 ```bash
-curl https://api.adstract.ai/ad-injection/start/ \
+curl https://api.adstract.ai/api/ad-injection/start/ \
   -H "X-Adstract-API-Key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{...}'
@@ -92,18 +92,15 @@ After your account is verified:
 
 See [Billing Key](/billing-key) for the full walkthrough.
 
-## `401 Unauthorized`
+## Authentication failures
 
-A `401` response means the key is missing, malformed, or revoked:
+If authentication fails, the exact HTTP status code depends on the endpoint and
+the specific failure condition.
 
-```json
-{
-  "detail": "Authentication credentials were not provided."
-}
-```
+See:
 
-Always verify that the header name is exactly `X-Adstract-API-Key` and the
-value is the full key string with no extra whitespace.
+- [Enhancement Status Codes](/api-reference/enhancement-status-codes)
+- [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes)
 
 ## Next steps
 

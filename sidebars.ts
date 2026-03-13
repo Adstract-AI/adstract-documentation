@@ -43,8 +43,22 @@ const sidebars: SidebarsConfig = {
                         'api-reference/acknowledgment-status-codes',
                     ],
                 },
-                'api-reference/api-request',
-                'api-reference/api-response',
+                {
+                    type: 'category',
+                    label: 'Request Body',
+                    items: [
+                        'api-reference/enhancement-request-body',
+                        'api-reference/acknowledgment-request-body',
+                    ],
+                },
+                {
+                    type: 'category',
+                    label: 'Response Body',
+                    items: [
+                        'api-reference/enhancement-response-body',
+                        'api-reference/acknowledgment-response-body',
+                    ],
+                },
             ],
         },
         {

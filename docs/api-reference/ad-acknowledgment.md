@@ -36,6 +36,9 @@ See [Authentication](/api-reference/api-authentication) for full details.
 }
 ```
 
+See [Acknowledgment Request Body](/api-reference/acknowledgment-request-body)
+for the full field reference and request shape.
+
 ## Example
 
 <Tabs groupId="api-language">
@@ -94,6 +97,14 @@ curl https://api.adstract.ai/api/ad-injection/acknowledge/ \
 
 See [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes) for a full breakdown of every code returned by this endpoint.
 
+## Response body
+
+Successful acknowledgments return a response body containing only the
+acknowledgment identifier.
+
+See [Acknowledgment Response Body](/api-reference/acknowledgment-response-body)
+for the response shape.
+
 ## When to call this endpoint
 
 Only call the acknowledgment endpoint when the Ad Injection endpoint returned
@@ -101,7 +112,7 @@ Only call the acknowledgment endpoint when the Ad Injection endpoint returned
 acknowledged — attempting to do so will return `400`.
 
 ```js
-const injectionResponse = await fetch("https://api.adstract.ai/ad-injection/start/", {
+const injectionResponse = await fetch("https://api.adstract.ai/api/ad-injection/start/", {
   method: "POST",
   headers: { "X-Adstract-API-Key": "your-api-key", "Content-Type": "application/json" },
   body: JSON.stringify({ prompt, request_context }),
@@ -133,4 +144,6 @@ if (adResponseId) {
 
 - [Ad Injection](/api-reference/ad-injection) — the injection endpoint that precedes acknowledgment.
 - [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes) — full breakdown of every HTTP status code returned by this endpoint.
+- [Acknowledgment Request Body](/api-reference/acknowledgment-request-body) — full request payload reference.
+- [Acknowledgment Response Body](/api-reference/acknowledgment-response-body) — full response payload reference.
 - [Authentication](/api-reference/api-authentication) — API key setup and the `X-Adstract-API-Key` header.

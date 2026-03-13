@@ -13,7 +13,7 @@ embedded. This is the direct HTTP equivalent of the SDK's `request_ad` method.
 ## Endpoint
 
 ```
-POST https://api.adstract.ai/ad-injection/start/
+POST https://api.adstract.ai/api/ad-injection/start/
 ```
 
 ## Authentication
@@ -25,11 +25,14 @@ See [Authentication](/api-reference/api-authentication) for full details.
 
 The minimum viable request includes `prompt` and `request_context`:
 
+For the complete payload shape, including `request_configuration` and
+`optional_context`, see [Enhancement Request Body](/api-reference/enhancement-request-body).
+
 <Tabs groupId="api-language">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
+const response = await fetch("https://api.adstract.ai/api/ad-injection/start/", {
   method: "POST",
   headers: {
     "X-Adstract-API-Key": "your-api-key",
@@ -53,7 +56,7 @@ const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
 import httpx
 
 response = httpx.post(
-    "https://api.adstract.ai/ad-injection/start/",
+    "https://api.adstract.ai/api/ad-injection/start/",
     headers={
         "X-Adstract-API-Key": "your-api-key",
         "Content-Type": "application/json",
@@ -73,7 +76,7 @@ response = httpx.post(
 <TabItem value="curl" label="cURL">
 
 ```bash
-curl https://api.adstract.ai/ad-injection/start/ \
+curl https://api.adstract.ai/api/ad-injection/start/ \
   -H "X-Adstract-API-Key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -95,7 +98,7 @@ curl https://api.adstract.ai/ad-injection/start/ \
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
+const response = await fetch("https://api.adstract.ai/api/ad-injection/start/", {
   method: "POST",
   headers: {
     "X-Adstract-API-Key": "your-api-key",
@@ -130,7 +133,7 @@ const response = await fetch("https://api.adstract.ai/ad-injection/start/", {
 import httpx
 
 response = httpx.post(
-    "https://api.adstract.ai/ad-injection/start/",
+    "https://api.adstract.ai/api/ad-injection/start/",
     headers={
         "X-Adstract-API-Key": "your-api-key",
         "Content-Type": "application/json",
@@ -161,7 +164,7 @@ response = httpx.post(
 <TabItem value="curl" label="cURL">
 
 ```bash
-curl https://api.adstract.ai/ad-injection/start/ \
+curl https://api.adstract.ai/api/ad-injection/start/ \
   -H "X-Adstract-API-Key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -206,7 +209,8 @@ determine whether `enhanced_prompt` is populated.
 ```
 
 `enhanced_prompt` and `product_name` are `null` when `success` is `false`.
-See [Response Body](/api-reference/api-response) for the full field reference.
+See [Enhancement Response Body](/api-reference/enhancement-response-body) for
+the full field reference.
 
 See [Enhancement Status Codes](/api-reference/enhancement-status-codes) for a
 full breakdown of every code.
@@ -221,8 +225,8 @@ full breakdown of every code.
 
 ## Next steps
 
-- [Request Body](/api-reference/api-request) — full field reference for the request payload.
-- [Response Body](/api-reference/api-response) — full field reference for the response payload.
+- [Enhancement Request Body](/api-reference/enhancement-request-body) — full field reference for the request payload.
+- [Enhancement Response Body](/api-reference/enhancement-response-body) — full field reference for the response payload.
 - [Ad Acknowledgment](/api-reference/ad-acknowledgment) — closing the ad cycle after your LLM responds.
 - [Enhancement Status Codes](/api-reference/enhancement-status-codes) — detailed breakdown of every HTTP status code returned by this endpoint.
 - [Authentication](/api-reference/api-authentication) — API key setup and header details.
