@@ -41,7 +41,8 @@ The response body has the same shape for all status codes. Always check
 | `201 Created` | `"rejected"` | `false` | `null` | `null` |
 | `202 Accepted` | `"no_fill"` | `false` | `null` | `null` |
 
-See [Status Codes](/api-reference/status-codes) for a full breakdown of every code.
+See [Enhancement Status Codes](/api-reference/enhancement-status-codes) for a
+full breakdown of every code.
 
 ## Handling all cases
 
@@ -135,6 +136,6 @@ fi
 
 ## Next steps
 
-- [Status Codes](/api-reference/status-codes) — detailed breakdown of every HTTP status code.
+- [Enhancement Status Codes](/api-reference/enhancement-status-codes) — detailed breakdown of every HTTP status code returned by ad enhancement.
 - [Ad Injection](/api-reference/ad-injection) — endpoint overview and integration flow.
 - [Request Body](/api-reference/api-request) — full request payload reference.

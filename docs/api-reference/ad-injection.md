@@ -208,7 +208,8 @@ determine whether `enhanced_prompt` is populated.
 `enhanced_prompt` and `product_name` are `null` when `success` is `false`.
 See [Response Body](/api-reference/api-response) for the full field reference.
 
-See [Status Codes](/api-reference/status-codes) for a full breakdown of every code.
+See [Enhancement Status Codes](/api-reference/enhancement-status-codes) for a
+full breakdown of every code.
 
 ## Integration flow
 
@@ -223,5 +224,5 @@ See [Status Codes](/api-reference/status-codes) for a full breakdown of every co
 - [Request Body](/api-reference/api-request) — full field reference for the request payload.
 - [Response Body](/api-reference/api-response) — full field reference for the response payload.
 - [Ad Acknowledgment](/api-reference/ad-acknowledgment) — closing the ad cycle after your LLM responds.
-- [Status Codes](/api-reference/status-codes) — detailed breakdown of every HTTP status code.
+- [Enhancement Status Codes](/api-reference/enhancement-status-codes) — detailed breakdown of every HTTP status code returned by this endpoint.
 - [Authentication](/api-reference/api-authentication) — API key setup and header details.

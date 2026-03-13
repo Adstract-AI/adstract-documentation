@@ -35,9 +35,16 @@ const sidebars: SidebarsConfig = {
                 'api-reference/api-authentication',
                 'api-reference/ad-injection',
                 'api-reference/ad-acknowledgment',
+                {
+                    type: 'category',
+                    label: 'Status Codes',
+                    items: [
+                        'api-reference/enhancement-status-codes',
+                        'api-reference/acknowledgment-status-codes',
+                    ],
+                },
                 'api-reference/api-request',
                 'api-reference/api-response',
-                'api-reference/status-codes',
             ],
         },
         {

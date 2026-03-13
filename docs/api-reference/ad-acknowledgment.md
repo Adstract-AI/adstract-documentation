@@ -92,7 +92,7 @@ curl https://api.adstract.ai/api/ad-injection/acknowledge/ \
 
 ## Response codes
 
-See [Status Codes — Ad Acknowledgment](/api-reference/status-codes#ad-acknowledgment) for a full breakdown of every code returned by this endpoint.
+See [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes) for a full breakdown of every code returned by this endpoint.
 
 ## When to call this endpoint
 
@@ -132,5 +132,5 @@ if (adResponseId) {
 ## Related pages
 
 - [Ad Injection](/api-reference/ad-injection) — the injection endpoint that precedes acknowledgment.
-- [Status Codes](/api-reference/status-codes) — full breakdown of all HTTP status codes.
+- [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes) — full breakdown of every HTTP status code returned by this endpoint.
 - [Authentication](/api-reference/api-authentication) — API key setup and the `X-Adstract-API-Key` header.
