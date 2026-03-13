@@ -16,6 +16,15 @@ At a high level, Adstract enables:
 - account and platform lifecycle management; and
 - API key based access control for integration environments.
 
+## Integration options
+
+Adstract can be integrated in two ways:
+
+- **REST API** — send HTTP requests directly to `api.adstract.ai`. No SDK
+  required. Use any language or HTTP client.
+- **Python SDK** — typed client with built-in validation, retries, and sync/async
+  support. The fastest path to integration in Python applications.
+
 ## Typical lifecycle
 
 The standard Publisher onboarding lifecycle is:

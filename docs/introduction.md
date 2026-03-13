@@ -7,8 +7,8 @@ Adstract helps teams monetize LLM experiences by inserting relevant sponsored
 content into prompts and providing reporting signals for measurement and policy
 checks.
 
-The SDK is the fastest way to integrate Adstract into an application
-without building direct HTTP integrations.
+Adstract can be accessed directly via the REST API or through the Python SDK,
+which wraps the API with typed models, validation, and built-in retries.
 
 ## What Adstract does
 
@@ -24,13 +24,21 @@ Adstract handle ad-enhancement and reporting logic.
 
 ## Why use the SDK
 
-Use the SDK when you want:
+Use the Python SDK when you want:
 
 - typed request/response models;
 - sync and async client methods;
 - built-in parameter validation and structured SDK errors;
 - retry/timeouts and simple runtime configuration; and
 - one integration path for enhancement and reporting.
+
+## Why use the REST API directly
+
+Use the REST API directly when you want:
+
+- language-agnostic integration — any HTTP client works;
+- minimal dependencies in your stack; or
+- full control over request construction and error handling.
 
 ## Integration model
 
@@ -46,4 +54,5 @@ After enhancement, you submit the final LLM response back via `acknowledge` or `
 ## Next steps
 
 - Continue to [Adstract Hub](/adstract-hub) to experience the platform without writing any code.
-- Continue to [Quickstart](/quickstart) for the full setup and first integration flow.
+- Continue to [Quickstart](/quickstart) for the full SDK setup and first integration flow.
+- Continue to [REST API](/api-reference/api-authentication) to integrate directly over HTTP.

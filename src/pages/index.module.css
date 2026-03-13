@@ -39,15 +39,6 @@
   display: block;
 }
 
-.eyebrow {
-  margin: 0;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: #8352C2;
-}
-
 .title {
   margin: 0.8rem 0 0;
   font-size: clamp(2rem, 4vw, 3.2rem);

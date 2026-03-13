@@ -14,10 +14,11 @@ This page covers critical notes that should be understood before production use.
 
 ## Privacy and data-protection model
 
-- The raw LLM response text is not sent to backend reporting as-is.
-- Reporting uses derived metrics and tracking metadata needed for acknowledgment.
-- This design helps reduce exposure risk and supports privacy/safety
-  expectations in application integrations.
+- The final model response text is sent to the Adstract backend as part of the
+  acknowledgment flow for compliance verification.
+- Adstract uses this text to verify that ad content was delivered correctly and
+  that reporting integrity is maintained.
+- Derived metrics and tracking metadata are also collected as part of this flow.
 
 ## Operational recommendation
 

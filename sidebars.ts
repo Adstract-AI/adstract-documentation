@@ -30,28 +30,46 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'category',
-            label: 'Core Concepts',
-            items: ['sdk-installation', 'client', 'ad-request-configuration', 'optional-context', 'enhancement-result', 'exception'],
+            label: 'REST API',
+            items: [
+                'api-reference/api-authentication',
+                'api-reference/ad-injection',
+                'api-reference/ad-acknowledgment',
+                'api-reference/api-request',
+                'api-reference/api-response',
+                'api-reference/status-codes',
+            ],
         },
         {
             type: 'category',
-            label: 'Starting',
-            items: ['initialize-integration'],
-        },
-        {
-            type: 'category',
-            label: 'Enhancement',
-            items: ['synchronous-enhancement', 'asynchronous-enhancement'],
-        },
-        {
-            type: 'category',
-            label: 'Acknowledgment',
-            items: ['synchronous-acknowledgment', 'asynchronous-acknowledgment'],
-        },
-        {
-            type: 'category',
-            label: 'Finishing',
-            items: ['finishing-and-lifecycle'],
+            label: 'SDK',
+            items: [
+                {
+                    type: 'category',
+                    label: 'Core Concepts',
+                    items: ['sdk-installation', 'client', 'ad-request-configuration', 'optional-context', 'enhancement-result', 'exception'],
+                },
+                {
+                    type: 'category',
+                    label: 'Starting',
+                    items: ['initialize-integration'],
+                },
+                {
+                    type: 'category',
+                    label: 'Enhancement',
+                    items: ['synchronous-enhancement', 'asynchronous-enhancement'],
+                },
+                {
+                    type: 'category',
+                    label: 'Acknowledgment',
+                    items: ['synchronous-acknowledgment', 'asynchronous-acknowledgment'],
+                },
+                {
+                    type: 'category',
+                    label: 'Finishing',
+                    items: ['finishing-and-lifecycle'],
+                },
+            ],
         },
         {
             type: 'category',

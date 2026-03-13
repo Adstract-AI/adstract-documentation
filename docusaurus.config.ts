@@ -6,7 +6,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 const config: Config = {
   title: "AdstractAI Platform",
   tagline: "Ad Network for LLMs",
-  favicon: "img/logo-white-2.svg",
+  favicon: "img/favicon.png",
 
   future: {
     v4: true,
@@ -53,7 +53,7 @@ const config: Config = {
       title: "Adstract Docs",
       logo: {
         alt: "Adstract Logo",
-        src: "img/logo-white-2.svg",
+        src: "img/logo-dark.svg",
         srcDark: "img/logo-white.svg",
       },
       items: [
