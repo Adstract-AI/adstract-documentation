@@ -7,7 +7,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "docusaurus deploy && node -e \"console.log('GO TO https://github.com/Adstract-AI/adstract-documentation/settings/pages AND ADD THE CUSTOM DOMAIN docs.adstract.ai to it')\"",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
