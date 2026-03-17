@@ -5,7 +5,7 @@ description: Product and SDK updates over time.
 
 Notable updates to the Adstract SDK and documentation are tracked here.
 
-## 1.0.1 - 2026-03-13
+## 1.0.1 - 2026-03-17
 
 ### Added
 
