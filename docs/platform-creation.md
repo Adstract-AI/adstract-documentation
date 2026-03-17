@@ -31,14 +31,14 @@ in the onboarding flow.
   - `mobile`
   - `plugin`
   - `other`
-- `Domain Type` (required):
-  - `Horizontal`
-  - `Vertical`
+- `Platform scope` (required):
+  - `General-Purpose`
+  - `Industry-Specific`
 
-### How to choose Domain Type
+### How to choose Platform scope
 
-- Choose `Horizontal` if your platform is a general conversational AI application or aggregator with broad usage.
-- Choose `Vertical` if your platform is focused on a specific domain (for example, coding), then select the matching vertical type.
+- Choose `General-Purpose` if your platform is a general conversational AI application or aggregator with broad usage.
+- Choose `Industry-Specific` if your platform is focused on a specific domain (for example, coding), then select the matching industry type.
 
 ### Insights section
 

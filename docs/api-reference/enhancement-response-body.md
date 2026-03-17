@@ -62,7 +62,7 @@ enhancement outcomes. Always check both `success` and `status`.
 - Description: Name of the product associated with the injected ad flow. This
   is `null` when no ad was injected.
 
-## `status` values by HTTP code
+## Response values by HTTP code
 
 | HTTP code | `status` | `success` | `enhanced_prompt` | `product_name` |
 |---|---|---|---|---|

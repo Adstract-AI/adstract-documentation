@@ -14,7 +14,7 @@ to a business role.
 
 - Explore the platform.
 - Review product experience before selecting a specialized role.
-- Prepare for a later upgrade to Publisher (or Advertiser when available).
+- Prepare for a later upgrade to Publisher or Advertiser.
 
 ## Limitations
 

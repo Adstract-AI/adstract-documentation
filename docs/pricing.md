@@ -3,7 +3,7 @@ title: Pricing
 description: Pricing model for Adstract SDK usage.
 ---
 
-Adstract SDK usage is completely free.
+Adstract usage is completely free.
 
 ## Current price
 

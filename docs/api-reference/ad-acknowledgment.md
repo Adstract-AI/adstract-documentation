@@ -22,12 +22,9 @@ POST https://api.adstract.ai/api/ad-injection/acknowledge/
 All requests must include your API key in the `X-Adstract-API-Key` header.
 See [Authentication](/api-reference/api-authentication) for full details.
 
-## Request body
+## Request
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `ad_response_id` | string (UUID) | yes | The `ad_response_id` from the `200` response of the Ad Injection endpoint. |
-| `llm_response` | string | yes | The complete final response text produced by your LLM. |
+The request includes `ad_response_id` and `llm_response`:
 
 ```json
 {
@@ -39,7 +36,7 @@ See [Authentication](/api-reference/api-authentication) for full details.
 See [Acknowledgment Request Body](/api-reference/acknowledgment-request-body)
 for the full field reference and request shape.
 
-## Example
+## Full request
 
 <Tabs groupId="api-language">
 <TabItem value="js" label="JavaScript" default>
@@ -93,23 +90,42 @@ curl https://api.adstract.ai/api/ad-injection/acknowledge/ \
 </TabItem>
 </Tabs>
 
-## Response codes
+## Response
 
-See [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes) for a full breakdown of every code returned by this endpoint.
+The response body has the same shape for all successful status codes.
 
-## Response body
+- `ad_ack_id`
+- `status`
+- `success`
 
-Successful acknowledgments return a response body containing only the
-acknowledgment identifier.
+The returned `status` can be:
 
+- `ok`
+- `no_ad_used`
+- `recoverable_error`
+
+```json
+{
+  "ad_ack_id": "55c59ce2-a31f-4ce4-95b3-f930fd9cd564",
+  "status": "ok",
+  "success": true
+}
+```
+
+`status` can be `ok`, `no_ad_used`, or `recoverable_error`. `success` is
+`true` when the acknowledgment completes successfully with `ok` or
+`no_ad_used`, and `false` when the backend returns `recoverable_error`.
 See [Acknowledgment Response Body](/api-reference/acknowledgment-response-body)
 for the response shape.
+
+See [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes)
+for a full breakdown of every code returned by this endpoint.
 
 ## When to call this endpoint
 
 Only call the acknowledgment endpoint when the Ad Injection endpoint returned
 `200`. Responses with status `201` (rejected) or `202` (no fill) must not be
-acknowledged — attempting to do so will return `400`.
+acknowledged — attempting to do so will return `406`.
 
 ```js
 const injectionResponse = await fetch("https://api.adstract.ai/api/ad-injection/start/", {

@@ -6,7 +6,7 @@ description: Create and use a Sandbox API key to generate traffic and meet the v
 A **Sandbox API key** is the only type of API key available to Publisher accounts
 before verification is approved.
 
-Sandbox keys are used to integrate and test the Adstract SDK, generate real traffic,
+Sandbox keys are used to integrate and test Adstract, generate real traffic,
 and demonstrate eligibility before requesting verification.
 
 ## Important: Sandbox traffic is not paid
@@ -27,7 +27,7 @@ After verification, you will create a [Billing Key](/billing-key) for paid produ
 4. Fill in the API key creation form:
    - `Label`
    - `Description`
-   - `Permission Type` — select **Sandbox**
+   - `Permission Type` — the only available option will be **Sandbox**
 5. Click `Create`.
 6. In the next window, copy the API key immediately.
    - This is the last time the full key is shown for security reasons.
@@ -39,11 +39,14 @@ After verification, you will create a [Billing Key](/billing-key) for paid produ
 - API keys are shown in full only once.
 - Store the key securely after creation.
 
-## Integrate the SDK with your Sandbox key
+## Integrate Adstract with your Sandbox key
 
-After creating your Sandbox key, integrate the SDK into your product workflows.
+After creating your Sandbox key, integrate Adstract into your product workflows.
 The Sandbox key is what you use during development and while building up traffic.
-For integration instructions see [SDK Installation](/sdk-installation) and [Quickstart](/quickstart).
+You can integrate through the SDK or through the REST API.
+
+For integration instructions, see [SDK Installation](/sdk-installation) and
+[Quickstart](/quickstart).
 
 ## Verification eligibility: 200 unique ad clicks
 
@@ -68,4 +71,6 @@ If you no longer want to use a Sandbox key:
 
 ## Next steps
 
+- Continue to [REST API Overview](/api-reference/rest-api-overview).
+- Continue to [Initialize Your Integration](/initialize-integration).
 - After reaching 200 unique ad clicks, continue to [Beneficiary Setup](/beneficiary).

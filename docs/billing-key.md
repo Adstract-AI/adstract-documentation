@@ -41,7 +41,7 @@ successfully verified. Traffic generated with a Billing key is eligible for paym
 
 ## Production traffic
 
-Replace any Sandbox key in your SDK integration with your new Billing key.
+Replace any Sandbox key in your integration with your new Billing key.
 From this point, all valid ad interactions generated through your platform
 are eligible for payment according to Adstract's revenue terms.
 
@@ -55,6 +55,7 @@ If you no longer want to use a Billing key:
 
 ## Next steps
 
-- Continue to [SDK Installation](/sdk-installation) if you have not yet integrated the SDK.
+- Continue to [REST API Overview](/api-reference/rest-api-overview).
+- Continue to [Initialize Your Integration](/initialize-integration).
 - If you are already integrated with a Sandbox key, simply replace the key value
   in your configuration.

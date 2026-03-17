@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
             type: 'category',
             label: 'REST API',
             items: [
+                'api-reference/rest-api-overview',
                 'api-reference/api-authentication',
                 'api-reference/ad-injection',
                 'api-reference/ad-acknowledgment',

@@ -5,6 +5,20 @@ description: Product and SDK updates over time.
 
 Notable updates to the Adstract SDK and documentation are tracked here.
 
+## 1.0.1 - 2026-03-13
+
+### Added
+
+- New `AdAckResponse` model for parsed acknowledgment responses.
+- `acknowledge` and `acknowledge_async` now return parsed acknowledgment data on success.
+- New `DuplicateAdRequestError` for enhancement `409 Conflict` responses.
+
+### Changed
+
+- The SDK now parses and validates successful acknowledgment responses from the backend.
+- Enhancement HTTP error mapping now reflects the latest backend contract for missing/invalid keys, revoked keys, inactive platform or publisher states, and duplicate ad requests.
+- The REST API and SDK documentation now reflect the structured acknowledgment response with `ad_ack_id`, `status`, and `success`.
+
 ## 1.0.0 - 2026-03-12
 
 ### Breaking Changes

@@ -32,7 +32,7 @@ The standard Publisher onboarding lifecycle is:
 1. Sign up as a Publisher.
 2. Create a platform and ensure it is active.
 3. Create a **Sandbox** API key.
-4. Integrate the SDK into your product workflows using the Sandbox key.
+4. Integrate Adstract (through SDK or REST) into your product workflows using the Sandbox key.
 5. Reach 200 unique ad clicks (traffic is not paid at this stage).
 6. Complete your profile by providing a valid beneficiary (payment details).
 7. Request verification — Adstract reviews and approves your account.

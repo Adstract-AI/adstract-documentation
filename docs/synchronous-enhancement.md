@@ -105,6 +105,7 @@ With `raise_exception=True` (default), `request_ad` raises on all failures:
 - `MissingParameterError` — required parameters missing
 - `NetworkError` — transport/connectivity failure
 - `AuthenticationError` — authentication/authorization failure
+- `DuplicateAdRequestError` — the provided message already has an ad request
 - `RateLimitError` — rate limit exceeded after retries
 - `ServerError` — server error after retries
 - `PromptRejectedError` — prompt not suitable for ad injection

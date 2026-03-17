@@ -59,7 +59,15 @@ code changes.
 
 - `AuthenticationError`
     - Raised on authentication/authorization failures.
-    - Typical HTTP statuses: `401`, `403`.
+    - Typical HTTP statuses:
+        - enhancement: `400`, `401`, `403`
+        - acknowledgment: `401`, `403`
+    - Typical trigger points:
+        - bad API key format (`400`);
+        - missing API key (`401`);
+        - invalid API key (`401`);
+        - revoked API key (`403`);
+        - platform or publisher not active (`403`).
 
 - `RateLimitError`
     - Raised after retry exhaustion when server keeps returning `429`.
@@ -74,7 +82,16 @@ code changes.
     - Typical trigger points:
         - unexpected `4xx` client error statuses (outside auth handling);
         - invalid JSON response body;
-        - response JSON does not match expected SDK model shape.
+        - response JSON does not match expected SDK model shape;
+        - acknowledgment `400` responses for bad API key format;
+        - acknowledgment `404` responses for missing ad responses;
+        - acknowledgment `406` responses for ad responses that were not successful enhancements;
+        - acknowledgment `409` responses for duplicate acknowledgments;
+        - acknowledgment success responses that do not match `AdAckResponse`.
+
+- `DuplicateAdRequestError`
+    - Raised when the provided message already has an ad request.
+    - Typical HTTP status: `409`.
 
 ## Ad enhancement exceptions
 
@@ -110,6 +127,7 @@ from adstractai.models import AdRequestContext
 from adstractai.errors import (
     AdEnhancementError,
     AuthenticationError,
+    DuplicateAdRequestError,
     MissingParameterError,
     NetworkError,
     NoFillError,
@@ -134,6 +152,8 @@ if isinstance(result.error, AuthenticationError):
     print("Authentication failed")
 elif isinstance(result.error, MissingParameterError):
     print("Missing required request field")
+elif isinstance(result.error, DuplicateAdRequestError):
+    print("Message already has an ad request")
 elif isinstance(result.error, RateLimitError):
     print("Rate limited")
 elif isinstance(result.error, ServerError):
@@ -157,6 +177,7 @@ from adstractai.models import AdRequestContext
 from adstractai.errors import (
     AdEnhancementError,
     AuthenticationError,
+    DuplicateAdRequestError,
     MissingParameterError,
     NetworkError,
     NoFillError,
@@ -180,6 +201,8 @@ except AuthenticationError:
     print("Authentication failed")
 except MissingParameterError:
     print("Missing required request field")
+except DuplicateAdRequestError:
+    print("Message already has an ad request")
 except RateLimitError:
     print("Rate limited")
 except ServerError:

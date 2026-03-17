@@ -9,7 +9,7 @@ language models in one place — and it is completely free to use.
 
 ## What makes Hub different
 
-Most products require you to implement the Adstract SDK before you can see
+Most products require you to implement Adstract before you can see
 anything. Hub removes that requirement entirely.
 
 Adstract is natively integrated into Hub, which means sponsored content flows
@@ -26,7 +26,7 @@ action.
 - **Advertisers** — see how promotional content appears within real
   conversational contexts before committing to a campaign.
 
-- **Publishers** — test the platform before integrating the SDK into your own
+- **Publishers** — test the platform before integrating into your own
   application. Use Hub to observe behavior, verify your understanding of the
   enhancement flow, and build confidence before writing integration code.
 
@@ -46,7 +46,7 @@ Adstract — without deploying any integration code.
 Hub serves as the reference implementation for the Adstract platform. The
 behavior you observe there — how enhancements are injected, how sponsored
 recommendations are presented, how the conversation flow is preserved — is
-exactly what your own integration will produce once the SDK is in place.
+exactly what your own integration will produce once everything is in place.
 
 ## Next steps
 

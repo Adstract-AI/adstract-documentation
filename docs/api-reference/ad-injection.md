@@ -193,7 +193,7 @@ curl https://api.adstract.ai/api/ad-injection/start/ \
 
 ## Response
 
-The response body has the same shape for all status codes. Check `success` to
+The response body has the same shape for all successful status codes. Check `success` to
 determine whether `enhanced_prompt` is populated.
 
 ```json

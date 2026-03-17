@@ -14,8 +14,7 @@ for verified ad traffic generated through your platform.
 
 ## Before you start
 
-- You must have a `Publisher` account.
-- You must have reached 200 unique ad clicks using a [Sandbox Key](/sandbox-key).
+- You must have a `Publisher` account. See [Signup](/signup).
 
 ## How to set up a beneficiary
 

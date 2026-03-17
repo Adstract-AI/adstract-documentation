@@ -7,28 +7,48 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 The acknowledgment response returns the identifier of the created
-acknowledgment record.
+acknowledgment record together with the normalized acknowledgment status and
+success flag.
 
 ## Structure
 
 ```json
 {
-  "ack_id": "string"
+  "ad_ack_id": "string",
+  "status": "string",
+  "success": "boolean"
 }
 ```
 
-## `ack_id`
+## `ad_ack_id`
 
 - Type: `string`
 - Description: Unique identifier of the acknowledgment record created by
   Adstract.
 
-## Response body by HTTP code
+## `status`
 
-| HTTP code | Response body |
-|---|---|
-| `200 OK` | Returns `ack_id` |
-| `201 Created` | Returns `ack_id` |
+- Type: `string`
+- Description: Normalized acknowledgment status returned by the backend.
+- Allowed values:
+  - `ok`
+  - `no_ad_used`
+  - `recoverable_error`
+
+## `success`
+
+- Type: `boolean`
+- Description: Whether the acknowledgment completed successfully.
+- Behavior:
+  - `true` when `status` is `ok` or `no_ad_used`
+  - `false` when `status` is `recoverable_error`
+
+## Response values by HTTP code
+
+| HTTP code | `status` | `success` | `ad_ack_id` |
+|---|---|---|---|
+| `200 OK` | `"ok"` or `"no_ad_used"` | `true` | populated |
+| `201 Created` | `"recoverable_error"` | `false` | populated |
 
 See [Acknowledgment Status Codes](/api-reference/acknowledgment-status-codes)
 for the full meaning of each response code.
@@ -53,7 +73,9 @@ const response = await fetch("https://api.adstract.ai/api/ad-injection/acknowled
 
 if (response.status === 200 || response.status === 201) {
   const data = await response.json();
-  const ackId = data.ack_id;
+  const ackId = data.ad_ack_id;
+  const status = data.status;
+  const success = data.success;
 }
 ```
 
@@ -76,7 +98,9 @@ response = httpx.post(
 )
 
 if response.status_code in {200, 201}:
-    ack_id = response.json()["ack_id"]
+    ack_id = response.json()["ad_ack_id"]
+    status = response.json()["status"]
+    success = response.json()["success"]
 ```
 
 </TabItem>

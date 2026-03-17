@@ -15,10 +15,9 @@ your integration should react.
 | `201` | Created | Success | Request logged but prompt rejected, use original prompt |
 | `202` | Accepted | Success | Request valid but no ad available, use original prompt |
 | `400` | Bad Request | Client error | API key format is invalid |
-| `401` | Unauthorized | Client error | API key is well-formed but not registered to a platform |
-| `403` | Forbidden | Client error | Platform or publisher is not active |
-| `422` | Unprocessable Entity | Client error | Request body failed validation |
-| `429` | Too Many Requests | Client error | Rate limit exceeded |
+| `401` | Unauthorized | Client error | No API key provided, or the API key is invalid |
+| `403` | Forbidden | Client error | API key revoked, or platform/publisher is not active |
+| `409` | Conflict | Client error | The provided message already has an ad request |
 | `5xx` | Server Error | Server error | Internal error, retry with backoff |
 
 ## `200 OK`
@@ -39,7 +38,7 @@ for ad injection. No ad was embedded. `success` is `false`, and
 Use the original prompt and continue your application flow without
 acknowledgment.
 
-Common cause: the prompt falls into a category where Adstract should not inject
+Common cause: the prompt falls into a category where Adstract does not inject
 ads.
 
 ## `202 Accepted`
@@ -69,14 +68,13 @@ Typical causes:
 
 ## `401 Unauthorized`
 
-The `X-Adstract-API-Key` header is present and correctly formatted, but no
-platform is registered to that key.
+This code is returned when authentication credentials are missing or the API
+key is invalid.
 
 Typical causes:
 
-- The key was copied incorrectly.
-- The key belongs to a different environment.
-- The key was deleted or never existed.
+- No API key was provided in the `X-Adstract-API-Key` header.
+- The provided API key does not exist or is invalid.
 
 ## `403 Forbidden`
 
@@ -85,26 +83,16 @@ permitted because of platform or publisher state.
 
 This covers:
 
-- paused or deleted platforms;
-- suspended or deleted publisher accounts; and
-- billing-key usage from an unverified publisher.
+- revoked API keys;
+- paused platforms; and
+- deleted or suspended publisher states.
 
-## `422 Unprocessable Entity`
+## `409 Conflict`
 
-The request body was parsed, but field-level validation failed.
+The message you provided already has an ad request associated with it.
 
-Common causes:
-
-- `prompt` is missing.
-- `request_context` is missing.
-- `session_id`, `user_agent`, or `user_ip` is missing inside `request_context`.
-- A field has the wrong type or invalid structure.
-
-## `429 Too Many Requests`
-
-Your integration exceeded the request rate limit for the current time window.
-
-Use exponential backoff and do not retry immediately.
+Do not retry the same message as a fresh enhancement request without first
+changing the message identity or request flow.
 
 ## `5xx`
 
@@ -120,8 +108,8 @@ The common integration pattern is:
 
 - `200`: use `enhanced_prompt`, call your LLM, then acknowledge.
 - `201` or `202`: use the original prompt and skip acknowledgment.
-- `400`, `401`, `403`, `422`: treat as integration/configuration issues.
-- `429` and `5xx`: retry with backoff according to your reliability policy.
+- `400`, `401`, `403`, `409`: treat as integration/state issues and investigate.
+- `5xx`: retry with backoff according to your reliability policy.
 
 ## Next steps
 

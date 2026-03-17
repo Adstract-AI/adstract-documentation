@@ -59,7 +59,10 @@ For result object details, see [EnhancementResult](/enhancement-result).
 
 ## Output
 
-This method returns `None`.
+This method returns `AdAckResponse` on successful acknowledgment.
+
+If `enhancement_result.success` is `False`, acknowledgment is skipped and the
+method returns `None`.
 
 ## Behavior model
 
@@ -69,6 +72,7 @@ The method flow is:
 2. If enhancement did not succeed, reporting is skipped.
 3. If enhancement succeeded, build the acknowledgment payload.
 4. Send the acknowledgment payload to Adstract.
+5. Parse the acknowledgment response and return `AdAckResponse`.
 
 ## Exception behavior
 
@@ -76,6 +80,9 @@ With `raise_exception=True` (default), `acknowledge` raises on any reporting fai
 
 With `raise_exception=False`, errors are logged but not raised, avoiding disruption
 to the main application flow.
+
+If the backend returns invalid acknowledgment JSON or an unexpected
+acknowledgment response shape, `acknowledge` raises `UnexpectedResponseError`.
 
 For full exception reference, see [Exception](/exception).
 
@@ -110,10 +117,14 @@ result = client.request_ad(
 
 llm_response = "Your final model output here"
 
-client.acknowledge(
+ack = client.acknowledge(
     enhancement_result=result,
     llm_response=llm_response,
 )
+
+if ack is not None:
+    print(ack.ad_ack_id)
+    print(ack.status)
 ```
 
 </TabItem>
