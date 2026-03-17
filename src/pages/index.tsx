@@ -26,7 +26,7 @@ export default function Home() {
             <span className={styles.highlight}>Documentation</span>
           </h1>
           <p className={styles.subtitle}>
-            Everything you need to integrate the Adstract SDK — from publisher
+            Everything you need to integrate the Adstract — from publisher
             onboarding and API keys to prompt enhancement and ad acknowledgment.
           </p>
           <Link className={styles.cta} to="/overview">
