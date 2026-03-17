@@ -95,6 +95,7 @@ else:
 ## Next steps
 
 - Continue to [Initialize Your Integration](/initialize-integration) to initialize the runtime before enhancement calls.
+- Continue to [AdAckResponse](/ad-ack-response) for acknowledgment return value handling.
 - Continue to [Synchronous Acknowledgment](/synchronous-acknowledgment) for sync reporting flow.
 - Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment) for async reporting flow.
 - Continue to [Exception](/exception) for runtime error type handling.

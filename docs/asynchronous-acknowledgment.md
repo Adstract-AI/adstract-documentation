@@ -91,7 +91,9 @@ For full exception reference, see [Exception](/exception).
 The raw final LLM response text is sent to the backend for acknowledgment
 and compliance verification. The flow is designed with privacy and safety
 constraints in mind, and all analytics and compliance metrics are computed
-on the backend.
+on the backend. 
+Adstract does not save `llm_response` in any form. It is used only
+during acknowledgment processing.
 
 ## Minimal async integration pattern
 

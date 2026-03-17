@@ -8,4 +8,4 @@ eligibility, and platform obligations.
 
 ## Terms of condition
 
-- [Open complete Terms of condition](#)
+- [Open complete Terms of condition](https://adstract.ai/terms-of-use)

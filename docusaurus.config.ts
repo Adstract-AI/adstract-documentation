@@ -56,18 +56,7 @@ const config: Config = {
         src: "img/logo-dark.svg",
         srcDark: "img/logo-white.svg",
       },
-      items: [
-          {
-          href: "https://adstract.ai",
-          label: "Adstract.ai",
-          position: "right",
-        },
-        {
-          href: "https://github.com/Adstract-AI/adstract-library",
-          label: "Adstract SDK",
-          position: "right",
-        },
-      ],
+      items: [],
     },
     footer: {
       style: "light",

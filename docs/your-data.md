@@ -21,8 +21,9 @@ Adstract uses only the data required to run enhancement and acknowledgment flows
 
 - `llm_response`
   - The final model response text is sent to the backend as part of
-    the acknowledgment flow for compliance verification.
-  - All analytics and compliance metrics are computed on the backend.
+    the acknowledgment flow so Adstract can analyze the response outcome.
+  - Adstract does not save `llm_response` in any form.
+  - It is used only for analysis during acknowledgment processing.
 
 ## Optional targeting data
 

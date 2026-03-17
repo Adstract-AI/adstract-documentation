@@ -14,6 +14,7 @@ The exception model is split into:
 - transport/HTTP exceptions raised while communicating with Adstract;
 - response parsing exceptions raised when server payloads are invalid; and
 - ad enhancement exceptions raised when the enhancement pipeline does not produce an ad.
+- ad acknowledgment exceptions raised when the acknowledgment pipeline fails.
 
 ## SDK design approach
 
@@ -51,17 +52,20 @@ code changes.
         - missing/empty `user_agent`;
         - missing/empty `user_ip`.
 
-## Network and HTTP exceptions
+## Network and Authentication exceptions
 
 - `NetworkError`
     - Raised for transport-level failures (timeouts/connectivity).
     - Includes `original_error` for underlying client failure context.
 
+- `RateLimitError`
+    - Raised after retry exhaustion when server keeps returning `429`.
+
 - `AuthenticationError`
     - Raised on authentication/authorization failures.
     - Typical HTTP statuses:
         - enhancement: `400`, `401`, `403`
-        - acknowledgment: `401`, `403`
+        - acknowledgment: `400`, `401`, `403`
     - Typical trigger points:
         - bad API key format (`400`);
         - missing API key (`401`);
@@ -69,13 +73,43 @@ code changes.
         - revoked API key (`403`);
         - platform or publisher not active (`403`).
 
-- `RateLimitError`
-    - Raised after retry exhaustion when server keeps returning `429`.
+## Ad enhancement exceptions
 
-- `ServerError`
-    - Raised after retry exhaustion for `5xx` server responses.
+- `AdEnhancementError`
+    - Raised when the ad enhancement pipeline did not produce a usable result
+      for a reason not covered by a more specific subclass.
 
-## Response-shape exceptions
+- `PromptRejectedError`
+    - Raised when the ad system determined the prompt content is not appropriate
+      for advertisement placement (`status='rejected'`).
+
+- `NoFillError`
+    - Raised when the prompt was suitable for ad injection, but no matching ad
+      inventory was available to fill the opportunity (`status='no_fill'`).
+
+- `DuplicateAdRequestError`
+    - Raised when the provided message already has an ad request.
+    - Typical HTTP status: `409`.
+
+## Ad acknowledgment exceptions
+
+- `AdAcknowledgmentError`
+    - Base type for acknowledgment-specific failures.
+
+- `AdResponseNotFoundError`
+    - Raised when the referenced `ad_response_id` does not exist.
+    - Typical HTTP status: `404`.
+
+- `UnsuccessfulAdResponseError`
+    - Raised when the referenced ad response was not created by a successful
+      enhancement.
+    - Typical HTTP status: `406`.
+
+- `DuplicateAcknowledgmentError`
+    - Raised when an acknowledgment already exists for the given ad response.
+    - Typical HTTP status: `409`.
+
+## Other exceptions
 
 - `UnexpectedResponseError`
     - Raised when response payload cannot be safely consumed.
@@ -83,29 +117,10 @@ code changes.
         - unexpected `4xx` client error statuses (outside auth handling);
         - invalid JSON response body;
         - response JSON does not match expected SDK model shape;
-        - acknowledgment `400` responses for bad API key format;
-        - acknowledgment `404` responses for missing ad responses;
-        - acknowledgment `406` responses for ad responses that were not successful enhancements;
-        - acknowledgment `409` responses for duplicate acknowledgments;
         - acknowledgment success responses that do not match `AdAckResponse`.
 
-- `DuplicateAdRequestError`
-    - Raised when the provided message already has an ad request.
-    - Typical HTTP status: `409`.
-
-## Ad enhancement exceptions
-
-- `AdEnhancementError`
-    - Raised when the ad enhancement pipeline did not produce a usable result
-      for a reason not covered by a more specific subclass.
-
-- `PromptRejectedError` (subclass of `AdEnhancementError`)
-    - Raised when the ad system determined the prompt content is not appropriate
-      for advertisement placement (`status='rejected'`).
-
-- `NoFillError` (subclass of `AdEnhancementError`)
-    - Raised when the prompt was suitable for ad injection, but no matching ad
-      inventory was available to fill the opportunity (`status='no_fill'`).
+- `ServerError`
+    - Raised after retry exhaustion for `5xx` server responses.
 
 ## Fallback method behavior
 
@@ -225,7 +240,8 @@ except AdEnhancementError:
 
 ## Next steps
 
-- Continue to [Initialize Your Integration](/initialize-integration) to begin the integration flow with a client instance.
+- Continue to [Initialize Your Integration](/initialize-integration) to begin the integration flow with a client
+  instance.
 - Continue to [Synchronous Acknowledgment](/synchronous-acknowledgment) for sync reporting behavior.
 - Continue to [Asynchronous Acknowledgment](/asynchronous-acknowledgment) for async reporting behavior.
 - Continue to [Important and Disclaimers](/important-disclaimers) for compliance and policy-critical guidance.

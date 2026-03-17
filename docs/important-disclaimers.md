@@ -19,6 +19,8 @@ This page covers critical notes that should be understood before production use.
 - Adstract uses this text to verify that ad content was delivered correctly and
   that reporting integrity is maintained.
 - Derived metrics and tracking metadata are also collected as part of this flow.
+- Adstract does not save the final `llm_response` in any form.
+- The response text is used only during acknowledgment processing.
 
 ## Operational recommendation
 

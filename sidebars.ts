@@ -69,7 +69,7 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Core Concepts',
-                    items: ['sdk-installation', 'client', 'ad-request-configuration', 'optional-context', 'enhancement-result', 'exception'],
+                    items: ['sdk-installation', 'client', 'ad-request-configuration', 'optional-context', 'enhancement-result', 'ad-ack-response', 'exception'],
                 },
                 {
                     type: 'category',
